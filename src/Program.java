@@ -8,7 +8,7 @@ public class Program {
 
         int answer;
         while (true) {
-            System.out.println("You find yourself trapped in a small, dark lit room.\n\nWhat do you want to do?\n1. Look in the wardrobe\n2. Inspect right door\n3. Inspect left door\n4. inspect table");
+            System.out.println("You find yourself trapped in a small, dark lit room.\n\nWhat do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table");
 
             Scanner sc = new Scanner(System.in);
             try {
@@ -26,15 +26,23 @@ public class Program {
 
         switch (answer){
 
+            //Wardrobe
             case 1:
 
                 break;
+
+             //Right door
             case 2:
-
+                System.out.println("You try opening the door, but it won’t move. Maybe you could look around to see if you can find a key?");
                 break;
+
+            //Cabinet
             case 3:
+                System.out.println("You have found 2 items!!\n You pick up a screwdriver and a small flag with a sphere attached to the bottom");
 
                 break;
+
+            //Table
             case 4:
 
                 break;
