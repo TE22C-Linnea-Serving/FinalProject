@@ -1,11 +1,11 @@
 public class Furniture {
 
     //Attributes
-    private String name;
+    public String name;
 
     //Constructor
-    Furniture(){
-        name = this.name;
+    Furniture(String name){
+        this.name = name;
     }
 
     //Methods

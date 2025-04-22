@@ -6,11 +6,12 @@ public class Inventory {
     ArrayList<Item> items = new ArrayList<>();
 
     public Inventory(){
-        items.add(new InteractibleItem("NameTag", "A piece of paper with your name on it"));
+        items.add(new InteractibleItem("NameTag", "A plate of wood with your name on it"));
     }
 
 
     //Methods
+
     public void displayInventory(){
         System.out.println("You currently have these items:");
         for(Item item: items){
@@ -19,6 +20,7 @@ public class Inventory {
     }
 
     public void pickUp(){
+
 
     }
 }

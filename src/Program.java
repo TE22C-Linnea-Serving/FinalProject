@@ -4,6 +4,9 @@ public class Program {
 
     public void program() {
 
+        User player = new User("Jess");
+        InteractibleFurniture n1 = new InteractibleFurniture("Cabinet", true);
+
         System.out.println("Backstory...");
 
         int answer;
@@ -39,7 +42,7 @@ public class Program {
             //Cabinet
             case 3:
                 System.out.println("You have found 2 items!!\n You pick up a screwdriver and a small flag with a sphere attached to the bottom");
-
+                player.backpack.items.add(Key());
                 break;
 
             //Table

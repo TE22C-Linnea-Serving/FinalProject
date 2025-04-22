@@ -2,7 +2,12 @@ public class User {
 
     //Attributes
     private String name;
-    private Inventory backpack;
+    Inventory backpack;
+
+    public User(String name){
+        this.name = name;
+        backpack = new Inventory();
+    }
 
     //Methods
     public String getName() {

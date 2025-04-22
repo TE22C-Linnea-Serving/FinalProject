@@ -4,6 +4,11 @@ public class Key extends InteractibleFurniture{
     private int id;
     private boolean used;
 
+    //Constructor
+    public Key(){
+
+    }
+
     //Methods
     public void use(){      //Override
 
