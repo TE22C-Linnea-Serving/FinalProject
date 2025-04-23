@@ -1,17 +1,20 @@
+import static java.awt.SystemColor.text;
+
 public class Furniture {
 
     //Attributes
     public String name;
+    public String description;
 
     //Constructor
-    Furniture(String name){
+    Furniture(String name, String description){
         this.name = name;
+        this.description = description;
     }
 
     //Methods
-    public String showDescription(){
-        String text = "";
+    public String showDescription(String description){
 
-        return text;
+        return description;
     }
 }

@@ -6,7 +6,7 @@ public class Inventory {
     ArrayList<Item> items = new ArrayList<>();
 
     public Inventory(){
-        items.add(new InteractibleItem("NameTag", "A plate of wood with your name on it"));
+        items.add(new InteractibleItem("Nametag", "A piece of plastic with your name on it."));
     }
 
 

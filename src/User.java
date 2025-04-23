@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class User {
 
     //Attributes
@@ -5,12 +7,23 @@ public class User {
     Inventory backpack;
 
     public User(String name){
-        this.name = name;
+        giveName() = name;
         backpack = new Inventory();
     }
 
     //Methods
-    public String getName() {
+    public String giveName() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What is your name?");
+
+        try{
+             name = sc.nextLine();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
         return name;
     }
 

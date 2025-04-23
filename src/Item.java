@@ -4,18 +4,16 @@ public class Item {
     String name;
     String description;
 
-    //Methods
-
-
-    public String getName(){
-        String text = "";
-
-        return text;
+    //Constructor
+    public Item(String name, String description){
+        this.name = name;
+        this.description = description;
     }
 
-    public String showDescription(){
-        String text = "";
+    //Methods
 
-        return text;
+    public String showDescription(String description){
+
+        return description;
     }
 }

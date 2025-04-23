@@ -1,12 +1,16 @@
-public class Key extends InteractibleFurniture{
+public class Key extends InteractibleItem{
 
     //Attributes
     private int id;
     private boolean used;
 
     //Constructor
-    public Key(){
-
+    public Key(String name, String description, int id, boolean used){
+        super(name, description);
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.used = used;
     }
 
     //Methods

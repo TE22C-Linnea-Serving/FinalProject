@@ -1,9 +1,13 @@
-public class Clue extends InteractibleFurniture{
+public class Clue extends InteractibleItem{
 
     //Attributes
     private String clue;
 
-    public Clue(String name, boolean locked) {
+    public Clue(String name, String description, String clue) {
+        super(name, description);
+        this.name = name;
+        this.description = description;
+        this.clue = clue;
     }
 
     //Methods
