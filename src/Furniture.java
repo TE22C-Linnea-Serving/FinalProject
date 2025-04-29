@@ -15,6 +15,8 @@ public class Furniture {
     //Methods
     public String showDescription(String description){
 
+        System.out.println("Description: " + description);
+
         return description;
     }
 }

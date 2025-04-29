@@ -7,7 +7,7 @@ public class User {
     Inventory backpack;
 
     public User(String name){
-        giveName() = name;
+        name = giveName();
         backpack = new Inventory();
     }
 
