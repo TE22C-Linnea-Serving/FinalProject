@@ -12,6 +12,6 @@ public class Clue extends InteractibleItem{
 
     //Methods
     public void use(){      //Override
-
+        System.out.println(clue);
     }
 }

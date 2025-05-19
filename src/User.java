@@ -6,8 +6,8 @@ public class User {
     private String name;
     Inventory backpack;
 
-    public User(String name){
-        name = giveName();
+    public User(){
+        this.name = name;
         backpack = new Inventory();
     }
 

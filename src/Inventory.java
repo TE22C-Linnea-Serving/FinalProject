@@ -13,11 +13,11 @@ public class Inventory {
     //Methods
 
     public void displayInventory(){
-        System.out.println("You currently have these items in your inventory:");
+        int i = 1;
         for(Item item: items){
-            System.out.println(item.name);
+            System.out.println(i + ". " + item.name);
+            i++;
         }
-        System.out.println();
     }
 
     public void pickUp(){

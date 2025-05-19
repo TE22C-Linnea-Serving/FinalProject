@@ -7,12 +7,15 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
+        boolean read1 =false;
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false);
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
 
-        User player = new User("Jess");
-        player.backpack.items.add(new InteractibleItem("Nametag", "A iece of lastic with your name on it."));
+        User player = new User();
+        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\""));
+
+        System.out.println(player.backpack.items.get(0).description);
 
         System.out.println("Backstory...");
 
@@ -35,13 +38,20 @@ public class Program {
 
                 //Wardrobe
                 case "1":
-                    if()
-                    System.out.println("There seems to be something at the bottom of the wardrobe, but you can't make out what it is.");
+                    //OM note inte är upptäckt
+                    if(read1==false) {
+                        System.out.println("There seems to be something at the bottom of the wardrobe, but you can't make out what it is.");
+
+                    } else if(read1==true) {
+                        //OM note är upptäckt
+
+                    }
+
                     break;
 
                 //Right door
                 case "2":
-                    System.out.println("You try opening the door, but it won’t move. Maybe you could look around to see if you can find some sort of key?");
+                    System.out.println("You try opening the door, but it won’t move. Maybe you could look around to see if you can find some sort of key?\n");
                     break;
 
                 //Cabinet
@@ -49,10 +59,10 @@ public class Program {
 
                     while(true) {
                         if (!cabinet1.contains.items.isEmpty()) {
-                            System.out.print("You have found: ");
-                            cabinet1.displayContains();
+                            System.out.print("You have found:\n");
+                            cabinet1.contains.displayInventory();
 
-                            System.out.println("Do you want to pick it up?\n");
+                            System.out.println("Do you want to pick it up? (y/n)\n");
                             String answer2 = sc.nextLine();
 
                             if (answer2.equalsIgnoreCase("yes")) {
@@ -62,12 +72,13 @@ public class Program {
                                 System.out.println("You have picked it up.\n");
                                 break;
                             } else if (answer2.equalsIgnoreCase("no")) {
+                                System.out.println("You leave without picking anything up.\n");
                                 break;
                             } else {
                                 System.out.println("Please try again:\n");
                             }
                         } else {
-                            System.out.println("There is nothing here\n");
+                            System.out.println("There is nothing here.\n");
                             break;
                         }
                     }
@@ -77,14 +88,47 @@ public class Program {
 
                 //Table
                 case "4":
-                    new Clue("Note", "A note with some text written on it", "\"I am writing this, so that if enyone ever finds themself in the same situation as myself, in hope that it will help. I have been stuck here for days now, and i'm starting to lose hope. However, I think I might have found a clue to escaping this room. There is a safe in a in a secret hatch in the wardrobe. To unlock it, you......\" The ink is smudged, and it is too dark to try to make out what it says.");
+                    Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n");
+
+                    System.out.println("A normal table with a note on it. Do you want to read the note?\n");
+
+                    answer = sc.nextLine();
+
+                    if(answer.equalsIgnoreCase("yes")){
+                        note1.use();
+                        read1 = true;
+
+                    }else if (answer.equalsIgnoreCase("no")){
+
+                        System.out.println("You leave without reading the note.\n");
+
+                    }else{
+
+                    }
 
 
                     break;
 
                 //Inventory show
                 case "5":
-                    player.backpack.displayInventory();
+                    while(true) {
+                        System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
+                        player.backpack.displayInventory();
+                        System.out.println("0 to esc");
+
+                        int answer1 = sc.nextInt();
+                        if (answer1 <= player.backpack.items.size()+1) {
+                            String enter = sc.nextLine();
+
+                            System.out.println(player.backpack.items.get(answer1+1).description);
+
+                            break;
+                        } else if (answer1 == 0) {
+                            break;
+                        } else {
+                            System.out.println("Please write one of the options");
+                        }
+                    }
                     break;
             }
         }
