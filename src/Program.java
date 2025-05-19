@@ -7,30 +7,31 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
-        boolean read1 =false;
+        String enter;
+        int answer1;
+        String answer;
+
+        User player = new User();
+
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false);
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
-
-        User player = new User();
-        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\""));
-
-        System.out.println(player.backpack.items.get(0).description);
+        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
 
         System.out.println("Backstory...");
-
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
         while(true) {
-            String answer = "";
             while (true) {
                 System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory");
-
                 answer = sc.nextLine();
-                System.out.println();
+                System.out.println();       //Space
 
                 if (answer.equals("1") || answer.equals("2") || answer.equals("3") || answer.equals("4") || answer.equals("5")) {
                     break;
+                }else{
+                    System.out.println("Please write one of the option.");
+                    enter = sc.nextLine();
                 }
             }
 
@@ -38,15 +39,44 @@ public class Program {
 
                 //Wardrobe
                 case "1":
-                    //OM note inte är upptäckt
-                    if(read1==false) {
-                        System.out.println("There seems to be something at the bottom of the wardrobe, but you can't make out what it is.");
 
-                    } else if(read1==true) {
-                        //OM note är upptäckt
+                    System.out.println("You walk over to the wardrobe and open it.\nInside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
 
+                    for (int i=0; i<=player.backpack.items.size()-1; i++) { //Looks for the screwdriver in player inventory
+                        if (player.backpack.items.get(i).id == 1) {     //The Screwdriver
+
+                            System.out.println("Do you want to use the screwdriver to unscrew the hatch door?\n");
+                            answer = sc.nextLine();
+
+                            while (true) {
+                                if (answer.equalsIgnoreCase("yes")) {
+
+                                    System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\n\nBehind it, you found what seems to be an endless dark pit.\n");
+                                    System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
+                                    answer = sc.nextLine();
+
+                                    while (true) {
+                                        if (answer.equalsIgnoreCase("1")) {
+                                            System.out.println("Yay");
+                                            break;
+                                        } else if (answer.equalsIgnoreCase("2")) {
+                                            System.out.println("You chose to not do anything, and leave.");
+                                            break;
+                                        } else {
+                                            System.out.println("Please select one of the options.");
+                                            enter = sc.nextLine();
+                                        }
+                                    }
+                                    break;
+                                } else if (answer.equalsIgnoreCase("no")) {
+                                    System.out.println("You chose to not do anything, and walk away from the wardrobe.\n");
+                                    break;
+                                } else {
+                                    System.out.println("Please write yes or no.\n");
+                                }
+                            }
+                        }
                     }
-
                     break;
 
                 //Right door
@@ -88,45 +118,58 @@ public class Program {
 
                 //Table
                 case "4":
-                    Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n");
+                    Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
 
                     System.out.println("A normal table with a note on it. Do you want to read the note?\n");
 
                     answer = sc.nextLine();
 
-                    if(answer.equalsIgnoreCase("yes")){
-                        note1.use();
-                        read1 = true;
-
-                    }else if (answer.equalsIgnoreCase("no")){
-
-                        System.out.println("You leave without reading the note.\n");
-
-                    }else{
-
+                    while(true) {
+                        if (answer.equalsIgnoreCase("yes")) {
+                            note1.use();
+                            read1 = true;
+                            break;
+                        } else if (answer.equalsIgnoreCase("no")) {
+                            System.out.println("You leave without reading the note.\n");
+                            break;
+                        } else {
+                            System.out.println("Please write yes or no.");
+                        }
                     }
 
-
                     break;
+
 
                 //Inventory show
                 case "5":
                     while(true) {
                         System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
+                        System.out.println("0. esc");
                         player.backpack.displayInventory();
-                        System.out.println("0 to esc");
 
-                        int answer1 = sc.nextInt();
-                        if (answer1 <= player.backpack.items.size()+1) {
-                            String enter = sc.nextLine();
+                        while(true) {
+                            try {
+                                answer1 = sc.nextInt();
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Write a number please");
+                                enter = sc.nextLine();
+                            }
+                        }
 
-                            System.out.println(player.backpack.items.get(answer1+1).description);
 
+                        enter = sc.nextLine();
+
+                        if (answer1 == 0) {
                             break;
-                        } else if (answer1 == 0) {
-                            break;
+
+                        } else if(answer1 <= player.backpack.items.size()) {
+
+                            answer1--;
+                            System.out.println("Description: " + player.backpack.items.get(answer1).description + "\n");
+
                         } else {
-                            System.out.println("Please write one of the options");
+                            System.out.println("Please write one of the options\n");
                         }
                     }
                     break;

@@ -3,11 +3,19 @@ public class Item {
     //Attributes
     String name;
     String description;
+    int id;
+    boolean used;
 
     //Constructor
-    public Item(String name, String description){
+    public Item(String name, String description, int id, boolean used){
         this.name = name;
         this.description = description;
+        this.id = id;
+        used = false;
+    }
+
+    public Item(String name, String description, int id){
+
     }
 
     //Methods

@@ -6,7 +6,7 @@ public class Key extends InteractibleItem{
 
     //Constructor
     public Key(String name, String description, int id, boolean used){
-        super(name, description);
+        super(name, description, id);
         this.name = name;
         this.description = description;
         this.id = id;
