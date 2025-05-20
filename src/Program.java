@@ -41,9 +41,12 @@ public class Program {
                 //Wardrobe
                 case "1":
 
-                    System.out.println("You walk over to the wardrobe and open it.\nInside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");    //Make it only appear when locked
+                    System.out.println("You walk over to the wardrobe and open it.\n");
 
                     if(wardrobe1.locked) {
+
+                        System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
+
                         for (int i = 0; i <= player.backpack.items.size() - 1; i++) { //Looks for the screwdriver in player inventory
                             if (player.backpack.items.get(i).id == 1) {     //The Screwdriver is in the players inventory
 
@@ -53,9 +56,9 @@ public class Program {
                                 while (true) {
                                     if (answer.equalsIgnoreCase("yes")) {
 
-                                        System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\n");
-                                        wardrobe1.locked = false;
-                                        player.backpack.items.remove(i);
+                                        System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\nHowever, the screwdriver broke!\n");
+                                        wardrobe1.locked = false;           //Wardrobe now unlocked
+                                        player.backpack.items.remove(i);    //Removes screwdriver from players inventory
                                         break;
                                     } else if (answer.equalsIgnoreCase("no")) {
                                         System.out.println("You chose to not do anything, and walk away from the wardrobe.\n");
@@ -67,7 +70,7 @@ public class Program {
                             }
                         }
                     } else {
-                        System.out.println("Behind the hatch, you found what seems to be an endless dark pit.\n");
+                        System.out.println("Inside, you find what seems to be an endless dark pit.\n");
                         System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
                         answer = sc.nextLine();
 
