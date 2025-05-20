@@ -6,10 +6,16 @@ public class Room {
     //Attributes
 
     private boolean lightLevel;
-    ArrayList<Furniture> furnitures = new ArrayList();
-    InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true);
+    ArrayList<InteractibleFurniture> furnitures = new ArrayList();
+    InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,0);
 
     //Methods
+    public void addFurniture(){
+        furnitures.add(wardrobe1);
+
+    }
+
+
     public String showRoomDescription(){
         String text = "null";
 

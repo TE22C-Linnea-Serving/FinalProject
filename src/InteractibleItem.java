@@ -8,6 +8,10 @@ public class InteractibleItem extends Item{
         this.id = id;
     }
 
+    public InteractibleItem() {
+
+    }
+
     //Mtehods
     public void use(){
 

@@ -18,6 +18,10 @@ public class Item {
 
     }
 
+    public Item() {
+
+    }
+
     //Methods
 
     public String showDescription(String description){
