@@ -102,10 +102,24 @@ public class Program {
 
                         for (int i=0; i<=player.backpack.items.size()-1; i++){  //Goes through the players inventory
                             if(player.backpack.items.get(i).id == 6){           //If the player has the door key in their inventory
-                                System.out.println("Do you want to use the door key?");
+                                System.out.println("Do you want to use the door key? (y/n)\n");
+                                answer = sc.nextLine();
+
+                                while(true) {
+                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+
+                                        break;
+                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                                        System.out.println("You leave without using the key.\n");
+                                        break;
+                                    }else{
+                                        System.out.println("Please write one of the options.\n");
+                                    }
+                                }
                             }else{                                              //If the player does not have the door key in their inventory
                                 System.out.print("Maybe you could look around to see if you can find some sort of key?\n");
                             }
+
 
                         }
 
@@ -149,7 +163,7 @@ public class Program {
                 //Table
                 case "4":
 
-                    System.out.println("A normal table with a note on it. Do you want to read the note?\n");
+                    System.out.println("A normal table with a note on it. Do you want to read the note? (y/n)\n");
                     answer = sc.nextLine();
 
                     while(true) {
@@ -178,7 +192,7 @@ public class Program {
                                 answer1 = sc.nextInt();
                                 break;
                             } catch (Exception e) {
-                                System.out.println("Write a number please");
+                                System.out.println("Please write a number.\n");
                                 enter = sc.nextLine();
                             }
                         }

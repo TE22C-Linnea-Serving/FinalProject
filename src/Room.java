@@ -28,17 +28,17 @@ public class Room {
             for (int i = 0; i <= player.backpack.items.size() - 1; i++) { //Looks for the screwdriver in player inventory
                 if (player.backpack.items.get(i).id == 1) {     //The Screwdriver is in the players inventory
 
-                    System.out.println("Do you want to use the screwdriver to unscrew the hatch door?\n");
+                    System.out.println("Do you want to use the screwdriver to unscrew the hatch door? (y/n)\n");
                     answer = sc.nextLine();
 
                     while (true) {
-                        if (answer.equalsIgnoreCase("yes")) {
+                        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
 
                             System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\nHowever, the screwdriver broke!\n");
                             wardrobe1.locked = false;           //Wardrobe now unlocked
                             player.backpack.items.remove(i);    //Removes screwdriver from players inventory
                             break;
-                        } else if (answer.equalsIgnoreCase("no")) {
+                        } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
                             System.out.println("You chose to not do anything, and walk away from the wardrobe.\n");
                             break;
                         } else {
