@@ -11,14 +11,16 @@ public class Program {
         int answer1;
         String answer;
 
+        Room room1 = new Room();
         User player = new User();
-
+        InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true);
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false);
-        InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true);
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
         player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
-
+        Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
+        room1.wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
+        room1.wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
         System.out.println("Backstory...");
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
@@ -41,7 +43,8 @@ public class Program {
                 //Wardrobe
                 case "1":
 
-                    System.out.println("You walk over to the wardrobe and open it.\n");
+                    room1.showWardrobe(player, answer,"");
+                   /* System.out.println("You walk over to the wardrobe and open it.\n");
 
                     if(wardrobe1.locked) {
 
@@ -87,11 +90,28 @@ public class Program {
                             }
                         }
                     }
+                    */
                     break;
 
                 //Right door
                 case "2":
-                    System.out.println("You try opening the door, but it won’t move. Maybe you could look around to see if you can find some sort of key?\n");
+
+                    if(door1.locked){       //If the door is locked
+
+                        System.out.println("You try opening the door, but it won’t move.");
+
+                        for (int i=0; i<=player.backpack.items.size()-1; i++){  //Goes through the players inventory
+                            if(player.backpack.items.get(i).id == 6){           //If the player has the door key in their inventory
+                                System.out.println("Do you want to use the door key?");
+                            }else{                                              //If the player does not have the door key in their inventory
+                                System.out.print("Maybe you could look around to see if you can find some sort of key?\n");
+                            }
+
+                        }
+
+                    }else{                  //If the door is unlocked
+
+                    }
                     break;
 
                 //Cabinet
@@ -128,7 +148,6 @@ public class Program {
 
                 //Table
                 case "4":
-                    Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
 
                     System.out.println("A normal table with a note on it. Do you want to read the note?\n");
                     answer = sc.nextLine();

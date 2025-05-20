@@ -18,6 +18,7 @@ public class Inventory {
             System.out.println(i + ". " + item.name);
             i++;
         }
+        System.out.println();
     }
 
     public void pickUp(){
