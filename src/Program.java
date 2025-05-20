@@ -14,6 +14,7 @@ public class Program {
         User player = new User();
 
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false);
+        InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true);
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
         player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
@@ -40,40 +41,46 @@ public class Program {
                 //Wardrobe
                 case "1":
 
-                    System.out.println("You walk over to the wardrobe and open it.\nInside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
+                    System.out.println("You walk over to the wardrobe and open it.\nInside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");    //Make it only appear when locked
 
-                    for (int i=0; i<=player.backpack.items.size()-1; i++) { //Looks for the screwdriver in player inventory
-                        if (player.backpack.items.get(i).id == 1) {     //The Screwdriver
+                    if(wardrobe1.locked) {
+                        for (int i = 0; i <= player.backpack.items.size() - 1; i++) { //Looks for the screwdriver in player inventory
+                            if (player.backpack.items.get(i).id == 1) {     //The Screwdriver is in the players inventory
 
-                            System.out.println("Do you want to use the screwdriver to unscrew the hatch door?\n");
-                            answer = sc.nextLine();
+                                System.out.println("Do you want to use the screwdriver to unscrew the hatch door?\n");
+                                answer = sc.nextLine();
 
-                            while (true) {
-                                if (answer.equalsIgnoreCase("yes")) {
+                                while (true) {
+                                    if (answer.equalsIgnoreCase("yes")) {
 
-                                    System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\n\nBehind it, you found what seems to be an endless dark pit.\n");
-                                    System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
-                                    answer = sc.nextLine();
-
-                                    while (true) {
-                                        if (answer.equalsIgnoreCase("1")) {
-                                            System.out.println("Yay");
-                                            break;
-                                        } else if (answer.equalsIgnoreCase("2")) {
-                                            System.out.println("You chose to not do anything, and leave.");
-                                            break;
-                                        } else {
-                                            System.out.println("Please select one of the options.");
-                                            enter = sc.nextLine();
-                                        }
+                                        System.out.println("You start unscrewing the hatch door...\nYou successfully removed the door hatch!\n");
+                                        wardrobe1.locked = false;
+                                        player.backpack.items.remove(i);
+                                        break;
+                                    } else if (answer.equalsIgnoreCase("no")) {
+                                        System.out.println("You chose to not do anything, and walk away from the wardrobe.\n");
+                                        break;
+                                    } else {
+                                        System.out.println("Please write yes or no.\n");
                                     }
-                                    break;
-                                } else if (answer.equalsIgnoreCase("no")) {
-                                    System.out.println("You chose to not do anything, and walk away from the wardrobe.\n");
-                                    break;
-                                } else {
-                                    System.out.println("Please write yes or no.\n");
                                 }
+                            }
+                        }
+                    } else {
+                        System.out.println("Behind the hatch, you found what seems to be an endless dark pit.\n");
+                        System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
+                        answer = sc.nextLine();
+
+                        while (true) {
+                            if (answer.equalsIgnoreCase("1")) {
+                                System.out.println("Yay");
+                                break;
+                            } else if (answer.equalsIgnoreCase("2")) {
+                                System.out.println("You chose to not do anything, and leave.");
+                                break;
+                            } else {
+                                System.out.println("Please select one of the options.");
+                                enter = sc.nextLine();
                             }
                         }
                     }
@@ -121,13 +128,11 @@ public class Program {
                     Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
 
                     System.out.println("A normal table with a note on it. Do you want to read the note?\n");
-
                     answer = sc.nextLine();
 
                     while(true) {
                         if (answer.equalsIgnoreCase("yes")) {
                             note1.use();
-                            read1 = true;
                             break;
                         } else if (answer.equalsIgnoreCase("no")) {
                             System.out.println("You leave without reading the note.\n");
@@ -136,7 +141,6 @@ public class Program {
                             System.out.println("Please write yes or no.");
                         }
                     }
-
                     break;
 
 
@@ -157,14 +161,12 @@ public class Program {
                             }
                         }
 
-
                         enter = sc.nextLine();
 
                         if (answer1 == 0) {
                             break;
 
                         } else if(answer1 <= player.backpack.items.size()) {
-
                             answer1--;
                             System.out.println("Description: " + player.backpack.items.get(answer1).description + "\n");
 
@@ -175,6 +177,5 @@ public class Program {
                     break;
             }
         }
-
     }
 }
