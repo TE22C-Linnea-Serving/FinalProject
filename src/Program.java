@@ -12,23 +12,27 @@ public class Program {
         int answer1;
         String answer;
 
+        int stage = 1;
+
         Room room1 = new Room();
         User player = new User();
         Key key1 = new Key();
 
         InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true,6);
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false,0);
+        InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,1);
+
 
         room1.furnitures.add(door1);
         room1.furnitures.add(cabinet1);
-        room1.furnitures.add(room1.wardrobe1);
+        room1.furnitures.add(wardrobe1);
 
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
         player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
-        room1.wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
-        room1.wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
+        wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
+        wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
         System.out.println("Backstory...");
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
@@ -39,9 +43,9 @@ public class Program {
 
                 if(answer1 == 1){
                     enter = sc.nextLine();
-                    while(true) {
+                    while(stage == 1) {
                         while (true) {
-                            System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory");
+                            System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory\n");
                             answer = sc.nextLine();
                             System.out.println();       //Space
 
@@ -58,7 +62,53 @@ public class Program {
                             //Wardrobe
                             case "1":
 
-                                room1.showWardrobe(player, answer,"");
+                                System.out.println("You walk over to the wardrobe and open it.\n");
+
+                                if(wardrobe1.locked) {
+
+                                    System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
+
+                                    String text = "You take the screwdriver and rotate it 360 degrees multiple times, till the screw comes loose. \nYou do this for each screw, until the door hatch is completely detachable.\n";
+                                    key1.use(player, wardrobe1, text);
+                                } else {
+                                    System.out.println("Inside, you find what seems to be an endless dark pit.\n");
+                                    System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
+
+                                    while (true) {
+                                        answer = sc.nextLine();
+                                        if (answer.equalsIgnoreCase("1")) {
+                                            if(!wardrobe1.contains.items.isEmpty()) {
+                                                System.out.println("Inside, you find:");
+                                                wardrobe1.contains.displayInventory();
+
+                                                System.out.println("Do you want to pick it up? (y/n)");
+                                                while(true) {
+                                                    answer = sc.nextLine();
+                                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+                                                        player.backpack.items.addAll(wardrobe1.contains.items);
+                                                        wardrobe1.contains.items.clear();
+                                                        System.out.println("You have now picket it up.");
+                                                        break;
+                                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                                                        System.out.println("You chose not to pick up the items and leave.\n");
+                                                        break;
+                                                    } else {
+                                                        System.out.println("Please write one of the options.\n");
+                                                    }
+                                                }
+                                            }else{
+                                                System.out.println("There is nothing here.\n");
+                                            }
+                                            break;
+                                        } else if (answer.equalsIgnoreCase("2")) {
+                                            System.out.println("You chose to not do anything, and leave.");
+                                            break;
+                                        } else {
+                                            System.out.println("Please select one of the options.");
+
+                                        }
+                                    }
+                                }
                                 break;
 
                             //Right door
@@ -68,38 +118,12 @@ public class Program {
 
                                     System.out.println("You try opening the door, but it won’t move.");
 
-                                    for (int i=0; i<=player.backpack.items.size()-1; i++){  //Goes through the players inventory
-                                        if(player.backpack.items.get(i).id == door1.id){           //If the player has the door key in their inventory
-                                            System.out.println("Do you want to use the door key? (y/n)\n");
-
-                                            while(true) {
-                                                answer = sc.nextLine();
-                                                if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                                    System.out.println("You put the door key into the key hole and turn it slowly.\nThe door that once closed has now opened, revealing another room, this time a bit lighter.\n");
-                                                    System.out.println("However, the key used to open the door, is now stuck in the keyhole, \nand refuses to let go without you locking the door again.\n");
-
-                                                    key1.use(player, i);
-
-                                                    //player.backpack.items.remove(i);
-                                                    //door1.locked = false;
-
-                                                    break;
-                                                } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                                                    System.out.println("You leave without using the key.\n");
-                                                    break;
-                                                }else{
-                                                    System.out.println("Please write one of the options.\n");
-                                                }
-                                            }
-                                        }else if(i == player.backpack.items.size()-1){                                              //If the player does not have the door key in their inventory
-                                            System.out.print("Maybe you could look around to see if you can find some sort of key?\n");
-                                        }
-
-
-                                    }
+                                    String text1 = "You put the door key into the key hole and turn it slowly.\nThe door that was once closed has now opened, revealing another room, this time a bit brighter.\nHowever, the key used to open the door, is now stuck in the keyhole, \nand refuses to let go, without you locking the door again.\n";
+                                    key1.use(player, door1, text1);
 
                                 }else{                  //If the door is unlocked
                                     System.out.println("You walk through the door.\n");
+                                    stage = 2;
                                 }
                                 break;
 
@@ -186,6 +210,17 @@ public class Program {
                                 }
                                 break;
                         }
+                    }
+                    while(stage == 2) {
+                        Enemy rat = new Enemy();
+                        System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
+                        answer1 = sc.nextInt();
+
+                        if(answer1 == 1){       //If the player does nothing
+
+                        }
+
+                        System.out.println("What do you want to do?\n");
                     }
                 } else if (answer1 == 2) {
                     new Ending().ending1();
