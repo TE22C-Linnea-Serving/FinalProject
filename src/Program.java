@@ -15,6 +15,7 @@ public class Program {
         Room room = new Room();     //Creates new Room (Way to access everything in the Room Class)
         User player = new User();   //Creates a new User
         Key key1 = new Key();       //Creates a new key (Way to access everything in the Key Class)
+        FriendlyCharacter cat = new FriendlyCharacter();
 
         //Adds the first item to the players inventory
         player.getBackpack().items.add(new InteractibleItem("Name tag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
@@ -112,7 +113,7 @@ public class Program {
 
                                     break;
                                 } else if (answer.equalsIgnoreCase("2")) {  //If the player wants to lock themselves in again
-                                    new Ending().ending34(player);              //Activates an ending
+                                    new Ending().ending34(player, cat);              //Activates an ending
 
                                 } else {
                                     System.out.println("Pleas write \"1\" or \"2\".\n");
@@ -264,7 +265,7 @@ public class Program {
 
                     //Cat
                     case "3":
-
+                        cat.interact();
 
                         break;
 
@@ -281,7 +282,7 @@ public class Program {
                             String text = "";
                             key1.use(player, room.exitDoor, text);
                             if(!room.exitDoor.isLocked()){       //If the player unlocked the exit door
-                                new Ending().ending56(player);
+                                new Ending().ending56(player, cat);
                             }else{                      //If the player did not unlock the exit door
                                 break;
                             }
