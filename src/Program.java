@@ -33,6 +33,8 @@ public class Program {
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
         wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
         wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
+        Enemy rat = new Enemy(0, false, 10);
+
         System.out.println("Backstory...");
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
@@ -211,17 +213,28 @@ public class Program {
                                 break;
                         }
                     }
+
+                    //SECOND ROOM CODE
                     while(stage == 2) {
-                        Enemy rat = new Enemy();
                         System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
                         answer1 = sc.nextInt();
 
+
                         if(answer1 == 1){       //If the player does nothing
 
+                        }else if(answer1 == 2) {
+
+                        }else {
+                            System.out.println("Please write one of the possible options.\n");
                         }
 
+                        //AFTER RAT INTERACTION
                         System.out.println("What do you want to do?\n");
                     }
+                    //END OF SECOND ROOM CODE
+
+
+
                 } else if (answer1 == 2) {
                     new Ending().ending1();
                     break;
