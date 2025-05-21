@@ -93,25 +93,25 @@ public class Program {
                     //Right door
                     case "2":
 
-                        if (room.door.isLocked()) {       //If the door is locked
+                        if (room.door.isLocked()) {                             //If the door is locked
 
                             System.out.println("You try opening the door, but it won’t move.");
 
                             String text1 = "You put the door key into the key hole and turn it slowly.\nThe door that was once closed has now opened, revealing another room, this time a bit brighter.\nHowever, the key used to open the door, is now stuck in the keyhole, \nand refuses to let go, without you locking the door again.\n";
-                            key1.use(player, room.door, text1);
+                            key1.use(player, room.door, text1);                 //Checks if the player has the right item to open the InteractableFurniture, and uses it
 
-                        } else {                         //If the door is unlocked
+                        } else {                                                //If the door is unlocked
                             System.out.println("What do you want to do?\n1. Walk through the door\n2. Lock the door again\n");
                             answer = sc.nextLine();
 
                             while (true) {
-                                if (answer.equalsIgnoreCase("1")) {
+                                if (answer.equalsIgnoreCase("1")) { //If the player walks through the door to the next room
                                     System.out.println("You walk through the door.\n");
-                                    stage = 2;
+                                    stage = 2;                                  //Changes room the program should loop around to the second room
 
                                     break;
-                                } else if (answer.equalsIgnoreCase("2")) {
-                                    new Ending().ending34(player);         //Activates an ending
+                                } else if (answer.equalsIgnoreCase("2")) {  //If the player wants to lock themselves in again
+                                    new Ending().ending34(player);              //Activates an ending
 
                                 } else {
                                     System.out.println("Pleas write \"1\" or \"2\".\n");
@@ -134,12 +134,11 @@ public class Program {
 
                         while (true) {
                             if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                note1.use();
-                                if(test1) {         //Makes it only happens per time the program is started
-                                    player.increaseKnowledge();
+                                note1.use();        //Writes out what it says on the note
+                                if(test1) {         //Makes it only happen one time after the program is started
+                                    player.increaseKnowledge();     //Increases the amount of knowledge the user has
                                     test1 = false;
                                 }
-                                System.out.println(player.getKnowledge());
                                 break;
                             } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
                                 System.out.println("You leave without reading the note.\n");
@@ -153,13 +152,13 @@ public class Program {
 
                     //Inventory show
                     case "5":
-                        player.showInventory();
+                        player.showInventory(); //Shows the players backpack, and allows the user to inspect the items inside
                         break;
                 }
-                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
+                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu, increases infection inside rat if the route has been triggered
             }
 
-            //SECOND ROOM CODE
+            //Rat Interaction
             while (stage == 2) {
                 while (rat.isRatInteraction()) {        //Happens if the interaction has not been triggered before
                     System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediately starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
@@ -189,8 +188,7 @@ public class Program {
                     }
                 }
 
-                //AFTER RAT INTERACTION
-
+                //Second Room
                 System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Go to the cat\n4. Show inventory\n5. Inspect Exit door\n6. Go back");
                 answer = sc.nextLine();
 
