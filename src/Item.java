@@ -4,18 +4,13 @@ public class Item {
     String name;
     String description;
     int id;
-    boolean used;
+
 
     //Constructor
-    public Item(String name, String description, int id, boolean used){
+    public Item(String name, String description, int id){
         this.name = name;
         this.description = description;
         this.id = id;
-        used = false;
-    }
-
-    public Item(String name, String description, int id){
-
     }
 
     public Item() {
@@ -23,9 +18,4 @@ public class Item {
     }
 
     //Methods
-
-    public String showDescription(String description){
-
-        return description;
-    }
 }

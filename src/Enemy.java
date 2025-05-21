@@ -1,11 +1,9 @@
 public class Enemy extends Character{
 
     //Attributes
-    private int HP;
-    private int attackPower;
-    private int infectionRate = 0;
+    private int infectionRate;
     private boolean infectionRoute ;
-    private int id;
+    private final int id;
     private boolean ratInteraction = true;
     private int infectionIncreaseHappens = 0;
 
@@ -18,11 +16,6 @@ public class Enemy extends Character{
 
 
     //Methods
-    public int fight(int attack, int HP){
-        int number = -1;
-
-        return number;
-    }
 
     public void infectionRateIncrease(User player, Enemy enemy, boolean infectionRoute) {
 
@@ -43,12 +36,11 @@ public class Enemy extends Character{
                 } else if (infectionRate == 4) {
                     System.out.println("\nThe rat suddenly leaps out from nowhere, attacking you!\n");
 
-                    for (int i = 0; i <= player.backpack.items.size() - 1; i++) {         //Check if player has weapon in backpack
+                    for (int i = 0; i <= player.backpack.items.size() - 1; i++) {         //Check if player has the right item in their backpack
                         if (player.backpack.items.get(i).id == enemy.id) {
                             System.out.println("You hastily pull out the " + player.backpack.items.get(i).name + " from your backpack, \nand manage to defend yourself with it by killing the rat!\n");
 
                         } else if (i == player.backpack.items.size() - 1) {              //If the for-loop did not find a weapon in player backpack
-                            player.death();
                             new Ending().ending2();
 
                         }
@@ -68,10 +60,6 @@ public class Enemy extends Character{
 
     public boolean isInfectionRoute() {
         return infectionRoute;
-    }
-
-    public int getInfectionRate() {
-        return infectionRate;
     }
 
     public void changeRatInteraction(){

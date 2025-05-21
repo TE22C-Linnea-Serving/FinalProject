@@ -3,16 +3,13 @@ import java.util.Scanner;
 public class Key extends InteractibleItem{
 
     //Attributes
-    private int id;
     private boolean used;
-    Room room1 = new Room();
 
     //Constructor
     public Key(String name, String description, int id, boolean used){
         super(name, description, id);
         this.name = name;
         this.description = description;
-        this.id = id;
         this.used = used;
     }
 
@@ -33,7 +30,7 @@ public class Key extends InteractibleItem{
                 while(true) {
                     String answer = sc.nextLine();
                     if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                        System.out.println(text1);  //Information for the player, unique for each interactible item
+                        System.out.println(text1);  //Information for the player, unique for each interactable item
                         player.backpack.items.remove(i);
                         interactibleFurniture.locked = false;
 

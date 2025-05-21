@@ -1,19 +1,14 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Room {
 
     //Attributes
+    ArrayList<InteractibleFurniture> furniture = new ArrayList<>();
 
-    private boolean lightLevel;
-    ArrayList<InteractibleFurniture> furnitures = new ArrayList();
+    //Constructor
+    Room(){
+
+    }
 
     //Methods
-
-
-    public String showRoomDescription(){
-        String text = "null";
-
-        return text;
-    }
 }

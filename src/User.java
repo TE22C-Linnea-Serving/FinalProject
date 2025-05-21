@@ -5,12 +5,12 @@ public class User {
     //Attributes
     private String name;
     Inventory backpack;
-    private boolean alive = true;
 
     public User(){
-        this.name = name;
+        name = getName();
         backpack = new Inventory();
     }
+
 
     //Methods
     public String giveName() {
@@ -30,16 +30,7 @@ public class User {
         return name;
     }
 
-    public void chooseName(){
-
-    }
-
-    public boolean death(){
-        alive = false;
-        return alive;
-    }
-
     public boolean isAlive() {
-        return alive;
+        return true;
     }
 }

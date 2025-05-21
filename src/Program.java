@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class Program {
@@ -8,7 +6,6 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
-        String enter;
         int answer1 = 0;
         String answer = "";
 
@@ -25,20 +22,22 @@ public class Program {
         InteractibleFurniture bookshelf1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
         InteractibleFurniture desk1 = new InteractibleFurniture("Desk", "A normal desk", true, 4);
 
-        room1.furnitures.add(door1);
-        room1.furnitures.add(cabinet1);
-        room1.furnitures.add(wardrobe1);
-        room2.furnitures.add(bookshelf1);
+        room1.furniture.add(door1);
+        room1.furniture.add(cabinet1);
+        room1.furniture.add(wardrobe1);
+        room2.furniture.add(bookshelf1);
 
 
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
-        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
+        player.backpack.items.add(new InteractibleItem("Name tag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 0);
         wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
         wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
         bookshelf1.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
-        Enemy rat = new Enemy(0, false, 10);
+        desk1.contains.items.add(new Key("Exit key", "It is the key to the exit door!!", 5, false));
+        desk1.contains.items.add(new Weapon("Letter opener", "A small knife used to open letters", 6));
+        Enemy rat = new Enemy(0, false, 6);
 
         System.out.println("Backstory...");
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
@@ -51,7 +50,7 @@ public class Program {
                 System.out.println("please choose one of the options.\n");
             }
             if (answer1 == 1) {
-                enter = sc.nextLine();
+                sc.nextLine();      //Enter
             } else if (answer1 == 2) {
                 new Ending().ending1();
             } else {
@@ -68,7 +67,7 @@ public class Program {
                     break;
                 } else {
                     System.out.println("Please write one of the option.");
-                    enter = sc.nextLine();
+                    sc.nextLine();  //Enter
                 }
                 rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
             }
@@ -176,11 +175,11 @@ public class Program {
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Please write a number.\n");
-                                enter = sc.nextLine();
+                                sc.nextLine(); //Enter
                             }
                         }
 
-                        enter = sc.nextLine();
+                        sc.nextLine();  //Enter
 
                         if (answer1 == 0) {
                             break;
@@ -199,7 +198,7 @@ public class Program {
             //SECOND ROOM CODE
                 while (stage == 2) {
                     while (rat.isRatInteraction()) {        //Happens if the interaction has not been triggered before
-                        System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
+                        System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediately starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
 
                         try {
                             answer1 = sc.nextInt();
@@ -210,13 +209,13 @@ public class Program {
                         if (answer1 == 1) {       //If the player does nothing, only text
                             System.out.println("You choose to do nothing while the rat is about to attack.\nJust when you think everything is over, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
                             rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
-                            enter = sc.nextLine();
+                            sc.nextLine();  //Enter
                             break;
                         } else if (answer1 == 2) {      //If the player punched the rat, triggers infectionRoute
                             System.out.println("You punch the rat!\nThe surprised rat does not have time to dodge, \nhowever, it manages to attack back with its teeth before fleeing, \nmaking you start bleeding a little.\n");
                             rat.changeToInfectionRoute();   //Opens up for ending 2
                             rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
-                            enter = sc.nextLine();
+                            sc.nextLine();  //Enter
                             break;
                         } else {                        //If the player wrote something that was not an option
                             System.out.println("Please write one of the possible options.\n");
@@ -225,7 +224,7 @@ public class Program {
 
                     //AFTER RAT INTERACTION
 
-                    System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Inspect Picture\n4. Go to the cat\n5. Show inventory\n6. Go back");
+                    System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Go to the cat\n4. Show inventory\n5. Go back");
                     answer = sc.nextLine();
                 }
                     switch (answer) {
@@ -293,19 +292,13 @@ public class Program {
 
                             break;
 
-                        //Picture
-                        case "3":
-                            System.out.println("OPTION 3");
-
-                            break;
-
                         //Cat
-                        case "4":
+                        case "3":
 
                             break;
 
                         //Inventory show
-                        case "5":
+                        case "4":
                             while (true) {
                                 System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
                                 System.out.println("0. esc");
@@ -317,11 +310,11 @@ public class Program {
                                         break;
                                     } catch (Exception e) {
                                         System.out.println("Please write a number.\n");
-                                        enter = sc.nextLine();
+                                        sc.nextLine();  //Enter
                                     }
                                 }
 
-                                enter = sc.nextLine();
+                                sc.nextLine();  //Enter
 
                                 if (answer1 == 0) {
                                     break;
@@ -337,7 +330,7 @@ public class Program {
                             break;
 
                         //Back to Room 1
-                        case "6":
+                        case "5":
                             System.out.println("You go back to the first room\n");
                             stage = 1;
 
