@@ -15,24 +15,29 @@ public class Program {
         int stage = 1;
 
         Room room1 = new Room();
+        Room room2 = new Room();
         User player = new User();
         Key key1 = new Key();
 
-        InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true,6);
+        InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true,3);
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false,0);
         InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,1);
-
+        InteractibleFurniture bookcase1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
 
         room1.furnitures.add(door1);
         room1.furnitures.add(cabinet1);
         room1.furnitures.add(wardrobe1);
 
+        room2.furnitures.add(bookcase1);
+
+
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
-        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
-        Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
-        wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
-        wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
+        player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
+        Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 0);
+        wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
+        wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
+        bookcase1.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
         Enemy rat = new Enemy(0, false, 10);
 
         System.out.println("Backstory...");
@@ -88,8 +93,7 @@ public class Program {
                                                 while(true) {
                                                     answer = sc.nextLine();
                                                     if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                                        player.backpack.items.addAll(wardrobe1.contains.items);
-                                                        wardrobe1.contains.items.clear();
+                                                        player.backpack.pickUp(player, wardrobe1);          //Picks up all items in wardrobe
                                                         System.out.println("You have now picket it up.");
                                                         break;
                                                     } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
@@ -156,8 +160,7 @@ public class Program {
                                         answer = sc.nextLine();
                                         if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
 
-                                            player.backpack.items.addAll(cabinet1.contains.items);
-                                            cabinet1.contains.items.clear();
+                                            player.backpack.pickUp(player, cabinet1);       //Picks up all items in cabinet
                                             System.out.println("You have picked it up.\n");
                                             break;
                                         } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
@@ -266,21 +269,38 @@ public class Program {
 
                                 //Bookshelf
                                 case "1":
-                                    System.out.println("You walk over to the bookshelf and look at the books.\n\nWhich book do you want to open?\n1. \n2. \n3. \n4. \n5. Leave bookshelf");
-                                    answer = sc.nextLine();
-                                    
-                                    if(answer.equalsIgnoreCase("1")){
-                                        
-                                    } else if (answer.equalsIgnoreCase("2")) {
-                                        
-                                    } else if (answer.equalsIgnoreCase("3")) {
-                                        
-                                    } else if (answer.equalsIgnoreCase("4")) {
-                                        
-                                    } else if (answer.equalsIgnoreCase("5")) {
-                                        
+
+                                    while(true) {
+                                        System.out.println("You walk over to the bookshelf and look at the books.\n\nWhich book do you want to open?\n1. \n2. \n3. \n4. \n5. Leave bookshelf");
+                                        answer = sc.nextLine();
+
+                                        if (answer.equalsIgnoreCase("1")) { //Book 1 (Notebook for story elements)
+                                            System.out.println("\"\"");
+
+                                        } else if (answer.equalsIgnoreCase("2")) {  //Book 2 (Normal book)
+                                            System.out.println("\"Dancing in the Rain\" Looks like a normal Romance book.\n");
+
+                                        } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
+                                            if(!bookcase1.contains.items.isEmpty()) {           //If there is items in the bookcase
+                                                System.out.println("You open the book, and finds a key inside!\n");
+                                                player.backpack.pickUp(player, bookcase1);      //Picks up all items in bookcase
+
+                                            }else{
+                                                System.out.println("You open the book, and finds it empty.\n");
+                                            }
+
+                                        } else if (answer.equalsIgnoreCase("4")) {  //Book 4 (Normal book)
+
+
+                                        } else if (answer.equalsIgnoreCase("5")) {  //Walk away from the bookcase
+
+                                            break;
+                                        } else {                                                //If user writes something that is not an option
+                                            System.out.println("Please write one of the options.\n");
+                                        }
                                     }
                                     break;
+
                                     
                                 //Desk    
                                 case "2":

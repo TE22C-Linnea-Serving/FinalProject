@@ -21,8 +21,9 @@ public class Inventory {
         System.out.println();
     }
 
-    public void pickUp(){
-
+    public void pickUp(User player, InteractibleFurniture interactibleFurniture){
+        player.backpack.items.addAll(interactibleFurniture.contains.items);
+        interactibleFurniture.contains.items.clear();
 
     }
 }
