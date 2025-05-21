@@ -35,25 +35,25 @@ public class Program {
                 } else if (answer1 == 2) {                                       //If the player chooses to stay in the room
                     new Ending().ending1();                                      //Ending one activated
                 } else {
-                    System.out.println("Please choose one of the options.\n");  //If user writes a number that was not an obtion
+                    System.out.println("Please write \"1\" or \"2\"\n");  //If user writes a number that was not an obtion
                 }
             } catch (Exception e) {
-                System.out.println("please choose one of the options.\n");
+                System.out.println("please write a number\n");
             }
         }
         sc.nextLine();  //Enter (Mainly used when changing between whether the user has to input a String or an int)
 
 
-        while(player.isAlive() && stage == 1) {         //If the user is alive and is supposed to be in room 1
+        while(player.isAlive() && stage == 1) {                                 //If the user is alive and is supposed to be in room 1
             while (stage == 1) {
                 while (true) {
                     System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory\n");
-                    answer = sc.nextLine();         //Takes in String from user
-                    System.out.println();           //Space (Makes the game more aesthetic)
+                    answer = sc.nextLine();                                    //Takes in String from user
+                    System.out.println();                                      //Space (Makes the game more aesthetic for user)
                     if (answer.equals("1") || answer.equals("2") || answer.equals("3") || answer.equals("4") || answer.equals("5")) {
-                        break;
+                        break;                                                 //Ends the while-loop if the player writes one of the options
                     } else {
-                        System.out.println("Please write one of the option.");
+                        System.out.println("Please write \"1\", \"2\", \"3\", \"4\" or \"5\".\n");
                         sc.nextLine();  //Enter
                     }
                 }
@@ -65,28 +65,26 @@ public class Program {
 
                         System.out.println("You walk over to the wardrobe and open it.\n");
 
-                        if (room.wardrobe.isLocked()) {
+                        if (room.wardrobe.isLocked()) {                       //If the wardrobe is currently locked, this code will play
 
                             System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
 
                             String text = "You take the screwdriver and rotate it 360 degrees multiple times, till the screw comes loose. \nYou do this for each screw, until the door hatch is completely detached.\n";
-                            key1.use(player, room.wardrobe, text);
-                        } else {
+                            key1.use(player, room.wardrobe, text);           //The method in Class Key, where it looks to see if you have the right item, and uses said item on the InteractableFurniture
+                        } else {                                             //If the wardrobe is unlocked
                             System.out.println("Inside, you find what seems to be an endless dark pit.\n");
                             System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
 
                             while (true) {
                                 answer = sc.nextLine();
-                                if (answer.equalsIgnoreCase("1")) {
-                                    player.getBackpack().pickUp(player, room.wardrobe);
-
+                                if (answer.equalsIgnoreCase("1")) {         //If the user wants to pick up the items in the unlocked InteractableFurniture
+                                    player.getBackpack().pickUp(player, room.wardrobe); //Adds all items is the chosen (inkapslade) InteractableFurniture into the player's backpack
                                     break;
-                                } else if (answer.equalsIgnoreCase("2")) {
-                                    System.out.println("You chose to not do anything, and leave.");
+                                } else if (answer.equalsIgnoreCase("2")) {  //If the user does not want to add the items in the unlocked InteractableFurniture
+                                    System.out.println("You choose not to do anything, and leave.");
                                     break;
                                 } else {
-                                    System.out.println("Please select one of the options.");
-
+                                    System.out.println("Please write \"1\" or \"2\".");
                                 }
                             }
                         }
@@ -102,7 +100,7 @@ public class Program {
                             String text1 = "You put the door key into the key hole and turn it slowly.\nThe door that was once closed has now opened, revealing another room, this time a bit brighter.\nHowever, the key used to open the door, is now stuck in the keyhole, \nand refuses to let go, without you locking the door again.\n";
                             key1.use(player, room.door, text1);
 
-                        } else {                  //If the door is unlocked
+                        } else {                         //If the door is unlocked
                             System.out.println("What do you want to do?\n1. Walk through the door\n2. Lock the door again\n");
                             answer = sc.nextLine();
 
