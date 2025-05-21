@@ -7,6 +7,7 @@ public class Enemy extends Character{
     private boolean infectionRoute ;
     private int id;
     private boolean ratInteraction = true;
+    private int infectionIncreaseHappens = 0;
 
     //Constructor
     public Enemy(int infectionRate, boolean infectionRoute, int id) {
@@ -23,39 +24,40 @@ public class Enemy extends Character{
         return number;
     }
 
-    public void infectionRateIncrease(User player, Enemy enemy, boolean infectionRoute){
-        System.out.println("yes2");
-        if(infectionRoute) {                //This only happens if the player triggered the starting event, if not, nothing happens
-            if (infectionRate == 1) {
-                System.out.println("yes3");
-                System.out.println("");
-                infectionRate++;
-            } else if (infectionRate == 2) {  //If the rat is on the second stage of the
-                System.out.println("yes4");
-                System.out.println("Just when, the rat can be seen again in the corner of your eyes.\nHowever, this time, there is something that is not quite right about it.\nIt...moves differently. Almost intelligently...as if it is someone else behind it's movements.\n");
-                infectionRate++;
-            } else if (infectionRate == 3) {
-                System.out.println("yes5");
-                System.out.println("");
-                infectionRate++;
-            } else if (infectionRate == 4) {
-                System.out.println("The rat suddenly leaps out from nowhere, attacking you!\n");
+    public void infectionRateIncrease(User player, Enemy enemy, boolean infectionRoute) {
+        infectionIncreaseHappens++;
 
-                for(int i = 0; i<=player.backpack.items.size()-1; i++) {         //Check if player has weapon in backpack
-                    if(player.backpack.items.get(i).id == enemy.id) {
-                        System.out.println("You hastily pull out the " + player.backpack.items.get(i).name + " from your backpack, \nand manage to defend yourself with it by killing the rat!\n");
+        if (infectionIncreaseHappens % 2 == 0) {    //If infectionIncreaseHappens is an even number
 
-                    }else if(i == player.backpack.items.size()-1){              //If the for-loop did not find a weapon in player backpack
-                        player.death();
-                        new Ending().ending2();
+            if (infectionRoute) {                //This only happens if the player triggered the starting event, if not, nothing happens
+                if (infectionRate == 1) {
+                    System.out.println("Once again, you can see the rat in the corner of the room. \nYou make sure to stay away from it, just to be safe.\n");
+                    infectionRate++;
+                } else if (infectionRate == 2) {  //If the rat is on the second stage of the
+                    System.out.println("Suddenly, the rat appears again!\nThis time, you get the feeling that the rat is staring you down, \ncontemplating about something.\n");
+                    infectionRate++;
+                } else if (infectionRate == 3) {
+                    System.out.println("Just when, the rat can be seen again in the corner of your eyes.\nHowever, this time, there is something that is not quite right about it.\nIt...moves differently. Almost intelligently...as if it is someone else behind it's movements.\n");
+                    infectionRate++;
+                } else if (infectionRate == 4) {
+                    System.out.println("The rat suddenly leaps out from nowhere, attacking you!\n");
 
+                    for (int i = 0; i <= player.backpack.items.size() - 1; i++) {         //Check if player has weapon in backpack
+                        if (player.backpack.items.get(i).id == enemy.id) {
+                            System.out.println("You hastily pull out the " + player.backpack.items.get(i).name + " from your backpack, \nand manage to defend yourself with it by killing the rat!\n");
+
+                        } else if (i == player.backpack.items.size() - 1) {              //If the for-loop did not find a weapon in player backpack
+                            player.death();
+                            new Ending().ending2();
+
+                        }
                     }
-                }
 
                 }
 
             }
         }
+    }
 
         public void changeToInfectionRoute(){
         infectionRate = 1;

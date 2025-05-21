@@ -14,7 +14,11 @@ public class Ending {
 
     }
 
-    public void ending4(){      //Fourth ending (Escape ending)
+    public void ending4(){      //Fourth ending (Escape without knowing the truth)
+
+    }
+
+    public void ending5(){      //Fifth ending (Escape while knowing the truth)
 
     }
 }

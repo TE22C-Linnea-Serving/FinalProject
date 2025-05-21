@@ -30,7 +30,7 @@ public class Program {
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
         cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
         player.backpack.items.add(new InteractibleItem("Nametag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",3));
-        Clue note1 = new Clue("Note", "A note with some text written on it", "\"\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
+        Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 4);
         wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 5));
         wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 6, false));
         Enemy rat = new Enemy(0, false, 10);
@@ -45,6 +45,7 @@ public class Program {
 
                 if(answer1 == 1){
                     enter = sc.nextLine();
+                    rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
                     while(stage == 1) {
                         while (true) {
                             System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory\n");
@@ -228,9 +229,12 @@ public class Program {
                                     }
 
                                     if (answer1 == 1) {       //If the player does nothing, only text
-                                        System.out.println("You choose to do nothing while the rat is about to attack.\nJust when, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
+                                        System.out.println("You choose to do nothing while the rat is about to attack.\nJust when you think everything is over, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
                                         rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
                                         enter = sc.nextLine();
+
+
+
                                         break;
                                     } else if (answer1 == 2) {      //If the player punched the rat, triggers infectionRoute
                                         System.out.println("You punch the rat!\nThe surprised rat does not have time to dodge, \nhowever, it manages to attack back with its teeth before fleeing, \nmaking you start bleeding a little.\n");
@@ -250,17 +254,19 @@ public class Program {
                             switch (answer) {
 
                                 case "1":
+                                    System.out.println("OPTION 1");
 
                                     break;
                                 case "2":
+                                    System.out.println("OPTION 2");
 
                                     break;
                                 case "3":
+                                    System.out.println("OPTION 3");
 
                                     break;
                                 case "4":
-                                    System.out.println("Yes1");
-                                    rat.infectionRateIncrease(player, rat, rat.isInfectionRoute());
+                                    System.out.println("OPTION 4");
 
                                     break;
                             }
