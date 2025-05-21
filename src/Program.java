@@ -10,7 +10,7 @@ public class Program {
 
         String enter;
         int answer1;
-        String answer;
+        String answer = "";
 
         int stage = 1;
 
@@ -45,9 +45,8 @@ public class Program {
 
                 if(answer1 == 1){
                     enter = sc.nextLine();
-                    rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
                     while(stage == 1) {
-                        while (true) {
+                        while (player.isAlive()) {
                             System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory\n");
                             answer = sc.nextLine();
                             System.out.println();       //Space
@@ -58,6 +57,7 @@ public class Program {
                                 System.out.println("Please write one of the option.");
                                 enter = sc.nextLine();
                             }
+                            rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
                         }
 
                         switch (answer) {
@@ -125,8 +125,22 @@ public class Program {
                                     key1.use(player, door1, text1);
 
                                 }else{                  //If the door is unlocked
-                                    System.out.println("You walk through the door.\n");
-                                    stage = 2;
+                                    System.out.println("What do you want to do?\n1. Walk through the door\n2. Lock the door again\n");
+                                    answer = sc.nextLine();
+                                    
+                                    while(true) {
+                                        if (answer.equalsIgnoreCase("1")) {
+                                            System.out.println("You walk through the door.\n");
+                                            stage = 2;
+                                            
+                                            break;
+                                        } else if (answer.equalsIgnoreCase("2")) {
+                                            new Ending().ending3();         //Activates an ending
+                                            
+                                        } else {
+                                            System.out.println("Pleas write one of the options.\n");
+                                        }
+                                    }
                                 }
                                 break;
 
@@ -219,7 +233,7 @@ public class Program {
                     while(stage == 2) {
 
                         while (player.isAlive()) {
-                                while (rat.isRatInteraction()) {        //Happens if the interaction has not been triggered before
+                            while (rat.isRatInteraction()) {        //Happens if the interaction has not been triggered before
                                     System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
 
                                     try {
@@ -232,9 +246,6 @@ public class Program {
                                         System.out.println("You choose to do nothing while the rat is about to attack.\nJust when you think everything is over, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
                                         rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
                                         enter = sc.nextLine();
-
-
-
                                         break;
                                     } else if (answer1 == 2) {      //If the player punched the rat, triggers infectionRoute
                                         System.out.println("You punch the rat!\nThe surprised rat does not have time to dodge, \nhowever, it manages to attack back with its teeth before fleeing, \nmaking you start bleeding a little.\n");
@@ -249,27 +260,53 @@ public class Program {
 
                                 //AFTER RAT INTERACTION
 
-                            System.out.println("What do you want to do?\n1. OPTION 1\n2. OPTION 2\n3. OPTION 3\n4. Infection Rate TEST");
+                            System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Inspect Picture\n4. Go to the cat\n5. Go back\n");
                             answer = sc.nextLine();
                             switch (answer) {
 
+                                //Bookshelf
                                 case "1":
-                                    System.out.println("OPTION 1");
-
+                                    System.out.println("You walk over to the bookshelf and look at the books.\n\nWhich book do you want to open?\n1. \n2. \n3. \n4. \n5. Leave bookshelf");
+                                    answer = sc.nextLine();
+                                    
+                                    if(answer.equalsIgnoreCase("1")){
+                                        
+                                    } else if (answer.equalsIgnoreCase("2")) {
+                                        
+                                    } else if (answer.equalsIgnoreCase("3")) {
+                                        
+                                    } else if (answer.equalsIgnoreCase("4")) {
+                                        
+                                    } else if (answer.equalsIgnoreCase("5")) {
+                                        
+                                    }
                                     break;
+                                    
+                                //Desk    
                                 case "2":
                                     System.out.println("OPTION 2");
 
                                     break;
+                                    
+                                //Picture    
                                 case "3":
                                     System.out.println("OPTION 3");
 
                                     break;
+                                    
+                                //Cat    
                                 case "4":
-                                    System.out.println("OPTION 4");
+                                    
+                                    break;
+                                    
+                                //Back to Room 1    
+                                case "5":
+                                    System.out.println("You go back to the first room\n");
+                                    stage = 1;
 
                                     break;
                             }
+                            rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
                         }
                     }
                     //END OF SECOND ROOM CODE
