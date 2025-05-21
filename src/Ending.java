@@ -6,7 +6,7 @@ public class Ending {
     }
 
     public void ending2(){      //Second ending (Dies to infected rat)
-        System.out.println("                      ENDING 2:\nYOU DIED BY THE RAT!");
+        System.out.println("                      ENDING 2:\n           YOU DIED BY THE RAT!");
 
     }
 

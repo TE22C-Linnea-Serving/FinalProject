@@ -217,49 +217,53 @@ public class Program {
                     //SECOND ROOM CODE
                     while(stage == 2) {
 
-                        while(rat.isRatInteraction())
-                        System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
-                        while(true){
-                            try {
-                                answer1 = sc.nextInt();
-                            } catch (Exception e) {
-                                System.out.println("Please write a number.\n");
+                        while (player.isAlive()) {
+                                while (rat.isRatInteraction()) {        //Happens if the interaction has not been triggered before
+                                    System.out.println("As you are walking into the second room, a rat appears!\nThe rat immediatly starts running towards you, ands starts climbing your leg.\nWhat do you want to do?\n1. Nothing\n2. Punch it");
+
+                                    try {
+                                        answer1 = sc.nextInt();
+                                    } catch (Exception e) {
+                                        System.out.println("Please write a number.\n");
+                                    }
+
+                                    if (answer1 == 1) {       //If the player does nothing, only text
+                                        System.out.println("You choose to do nothing while the rat is about to attack.\nJust when, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
+                                        rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
+                                        enter = sc.nextLine();
+                                        break;
+                                    } else if (answer1 == 2) {      //If the player punched the rat, triggers infectionRoute
+                                        System.out.println("You punch the rat!\nThe surprised rat does not have time to dodge, \nhowever, it manages to attack back with its teeth before fleeing, \nmaking you start bleeding a little.\n");
+                                        rat.changeToInfectionRoute();   //Opens up for ending 2
+                                        rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
+                                        enter = sc.nextLine();
+                                        break;
+                                    } else {                        //If the player wrote something that was not an option
+                                        System.out.println("Please write one of the possible options.\n");
+                                    }
+                                }
+
+                                //AFTER RAT INTERACTION
+
+                            System.out.println("What do you want to do?\n1. OPTION 1\n2. OPTION 2\n3. OPTION 3\n4. Infection Rate TEST");
+                            answer = sc.nextLine();
+                            switch (answer) {
+
+                                case "1":
+
+                                    break;
+                                case "2":
+
+                                    break;
+                                case "3":
+
+                                    break;
+                                case "4":
+                                    System.out.println("Yes1");
+                                    rat.infectionRateIncrease(player, rat, rat.isInfectionRoute());
+
+                                    break;
                             }
-
-                            if (answer1 == 1) {       //If the player does nothing, only text
-                                System.out.println("You choose to do nothing while the rat is about to attack.\nJust when, a cat suddenly jumps out and attack the rat.\nThe rat that was once alive and moving, is now in the cat's mouth, hanging lifelessly.\n");
-                                rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
-                                break;
-                            } else if (answer1 == 2) {      //If the player punched the rat, triggers infectionRoute
-                                System.out.println("You punch the rat!\nThe surprised rat does not have time to dodge, \nhowever, it manages to attack back with its teeth before fleeing, \nmaking you start bleeding a little.\n");
-                                rat.changeToInfectionRoute();
-                                rat.changeRatInteraction();     //Makes it so that this interaction does not happen again
-                                break;
-                            } else {                        //If the player wrote something that was not an option
-                                System.out.println("Please write one of the possible options.\n");
-                            }
-                        }
-                        enter = sc.nextLine();
-
-                        //AFTER RAT INTERACTION
-                        System.out.println("What do you want to do?\n1. OPTION 1\n2. OPTION 2\n3. OPTION 3\n4. Infection Rate TEST");
-                        answer = sc.nextLine();
-                        switch (answer){
-
-                            case "1":
-
-                                break;
-                            case "2":
-
-                                break;
-                            case "3":
-
-                                break;
-                            case "4":
-
-                                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute());
-
-                                break;
                         }
                     }
                     //END OF SECOND ROOM CODE
