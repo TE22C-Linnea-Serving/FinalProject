@@ -32,16 +32,16 @@ public class Enemy extends Character{
                 if (infectionIncreaseHappens % 2 == 0) {    //If infectionIncreaseHappens is an even number
 
                     if (infectionRate == 1) {
-                    System.out.println("Once again, you can see the rat in the corner of the room. \nYou make sure to stay away from it, just to be safe.\n");
+                    System.out.println("\nOnce again, you can see the rat in the corner of the room. \nYou make sure to stay away from it, just to be safe.\n");
                     infectionRate++;
                 } else if (infectionRate == 2) {  //If the rat is on the second stage of the
-                    System.out.println("Suddenly, the rat appears again!\nThis time, you get the feeling that the rat is staring you down, \ncontemplating about something.\n");
+                    System.out.println("\nSuddenly, the rat appears again!\nThis time, you get the feeling that the rat is staring you down, \ncontemplating about something.\n");
                     infectionRate++;
                 } else if (infectionRate == 3) {
-                    System.out.println("Just when, the rat can be seen again in the corner of your eyes.\nHowever, this time, there is something that is not quite right about it.\nIt...moves differently. Almost intelligently...as if it is someone else behind it's movements.\n");
+                    System.out.println("\nJust when, the rat can be seen again in the corner of your eyes.\nHowever, this time, there is something that is not quite right about it.\nIt...moves differently. Almost intelligently...as if it is someone else behind it's movements.\n");
                     infectionRate++;
                 } else if (infectionRate == 4) {
-                    System.out.println("The rat suddenly leaps out from nowhere, attacking you!\n");
+                    System.out.println("\nThe rat suddenly leaps out from nowhere, attacking you!\n");
 
                     for (int i = 0; i <= player.backpack.items.size() - 1; i++) {         //Check if player has weapon in backpack
                         if (player.backpack.items.get(i).id == enemy.id) {

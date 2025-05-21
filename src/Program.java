@@ -22,13 +22,14 @@ public class Program {
         InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true,3);
         InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false,0);
         InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,1);
-        InteractibleFurniture bookcase1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
+        InteractibleFurniture bookshelf1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
+        InteractibleFurniture desk1 = new InteractibleFurniture("Desk", "A normal desk", true, 4);
 
         room1.furnitures.add(door1);
         room1.furnitures.add(cabinet1);
         room1.furnitures.add(wardrobe1);
 
-        room2.furnitures.add(bookcase1);
+        room2.furnitures.add(bookshelf1);
 
 
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
@@ -37,7 +38,7 @@ public class Program {
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 0);
         wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
         wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
-        bookcase1.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
+        bookshelf1.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
         Enemy rat = new Enemy(0, false, 10);
 
         System.out.println("Backstory...");
@@ -76,7 +77,7 @@ public class Program {
 
                                     System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
 
-                                    String text = "You take the screwdriver and rotate it 360 degrees multiple times, till the screw comes loose. \nYou do this for each screw, until the door hatch is completely detachable.\n";
+                                    String text = "You take the screwdriver and rotate it 360 degrees multiple times, till the screw comes loose. \nYou do this for each screw, until the door hatch is completely detached.\n";
                                     key1.use(player, wardrobe1, text);
                                 } else {
                                     System.out.println("Inside, you find what seems to be an endless dark pit.\n");
@@ -85,27 +86,8 @@ public class Program {
                                     while (true) {
                                         answer = sc.nextLine();
                                         if (answer.equalsIgnoreCase("1")) {
-                                            if(!wardrobe1.contains.items.isEmpty()) {
-                                                System.out.println("Inside, you find:");
-                                                wardrobe1.contains.displayInventory();
+                                            player.backpack.pickUp(player,wardrobe1);
 
-                                                System.out.println("Do you want to pick it up? (y/n)");
-                                                while(true) {
-                                                    answer = sc.nextLine();
-                                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                                        player.backpack.pickUp(player, wardrobe1);          //Picks up all items in wardrobe
-                                                        System.out.println("You have now picket it up.");
-                                                        break;
-                                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                                                        System.out.println("You chose not to pick up the items and leave.\n");
-                                                        break;
-                                                    } else {
-                                                        System.out.println("Please write one of the options.\n");
-                                                    }
-                                                }
-                                            }else{
-                                                System.out.println("There is nothing here.\n");
-                                            }
                                             break;
                                         } else if (answer.equalsIgnoreCase("2")) {
                                             System.out.println("You chose to not do anything, and leave.");
@@ -151,29 +133,7 @@ public class Program {
                             //Cabinet
                             case "3":
 
-                                while(true) {
-                                    if (!cabinet1.contains.items.isEmpty()) {
-                                        System.out.print("You have found:\n");
-                                        cabinet1.contains.displayInventory();
-
-                                        System.out.println("Do you want to pick it up? (y/n)\n");
-                                        answer = sc.nextLine();
-                                        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-
-                                            player.backpack.pickUp(player, cabinet1);       //Picks up all items in cabinet
-                                            System.out.println("You have picked it up.\n");
-                                            break;
-                                        } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                                            System.out.println("You leave without picking anything up.\n");
-                                            break;
-                                        } else {
-                                            System.out.println("Please try again:\n");
-                                        }
-                                    } else {
-                                        System.out.println("There is nothing here.\n");
-                                        break;
-                                    }
-                                }
+                                player.backpack.pickUp(player, cabinet1);
 
 
                                 break;
@@ -296,22 +256,8 @@ public class Program {
                                             System.out.println("\"Dancing in the Rain\" Looks like a normal romance book.\n");
 
                                         } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
-                                            if(!bookcase1.contains.items.isEmpty()) {           //If there is items in the bookcase
-                                                System.out.println("You open the book, and finds a key inside!\n");
-                                                while(true) {
-                                                    System.out.println("Do you want to pic it up? (y/n)\n");
-                                                    answer = sc.nextLine();
-                                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                                        System.out.println("You pick up the key, and put the book back.\n");
-                                                        player.backpack.pickUp(player, bookcase1);      //Picks up all items in bookcase
-                                                        break;
-                                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                                                        System.out.println("You choose not to pick up the key, and put the book back.\n");
-                                                        break;
-                                                    } else {
-                                                        System.out.println("Please write yes or no.\n");
-                                                    }
-                                                }
+                                            if(!bookshelf1.contains.items.isEmpty()) {           //If there is items in the bookcase
+                                                player.backpack.pickUp(player, bookshelf1);
 
                                             }else{
                                                 System.out.println("You open the book, and finds it empty.\n");
@@ -332,7 +278,15 @@ public class Program {
                                     
                                 //Desk    
                                 case "2":
-                                    System.out.println("OPTION 2");
+                                    if(desk1.locked) {
+                                        System.out.println("You walk over to the desk, and find a locked drawer.\n");
+                                        String text2 = "You take the desk key, and open up the drawer";
+                                        key1.use(player, desk1, text2);
+                                    }else{
+                                        System.out.println("You found:\n");
+                                        desk1.contains.displayInventory();
+
+                                    }
 
                                     break;
                                     
