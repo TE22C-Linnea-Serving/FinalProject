@@ -2,8 +2,9 @@ public class InteractibleFurniture extends Furniture{
 
     //Attributes
     private final Inventory contains;
-    private boolean locked;
+    private boolean locked;             //Says if the InteractableFurniture is locked or not
     private final int id;
+
 
     public InteractibleFurniture(String name, String description, boolean locked, int id){
         super(name, description);

@@ -6,22 +6,23 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
-        boolean test1 = true;
-        boolean test2 = true;
-        int answer1;
-        String answer;
-        int stage = 0;
+        boolean test1 = true;   //For a code to play once per program start
+        boolean test2 = true;   //For a code to play once per program start
+        int answer1;            //The user's answer when it is an int
+        String answer;          //The user's answer when it is a String
+        int stage = 0;          //What game stage/room the program should loop around
 
-        Room room = new Room();
-        User player = new User();
-        Key key1 = new Key();
+        Room room = new Room();     //Creates new Room (Way to access everything in the Room Class)
+        User player = new User();   //Creates a new User
+        Key key1 = new Key();       //Creates a new key (Way to access everything in the Key Class)
 
+        //Adds the first item to the players inventory
         player.getBackpack().items.add(new InteractibleItem("Name tag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
+
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 0);
         Enemy rat = new Enemy(0, false, 6);
 
-        System.out.println("Backstory...");
-        System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
+        System.out.println("You are slowly retaining you consciousness, realising that you do not recognise where this is.\nAfter looking around the dark lit room you have found yourself in, you realize that you are locked inside.\n\n");
 
 
         while(stage == 0) {     //Only happens the first time the code is run
@@ -262,7 +263,8 @@ public class Program {
                         break;
 
                     //Cat
-                    case "3":       //NOT YET ADDED
+                    case "3":
+
 
                         break;
 

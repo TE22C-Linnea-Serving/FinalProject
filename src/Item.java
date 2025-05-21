@@ -3,7 +3,7 @@ public class Item {
     //Attributes
     private String name;
     private String description;
-    private int id;
+    private int id;             //Used to be able to identify certain items
 
 
     //Constructor

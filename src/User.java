@@ -26,7 +26,7 @@ public class User {
         while (true) {
             System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
             System.out.println("0. esc");
-            backpack.displayInventory();
+            backpack.displayInventory();    //Shows what items are inside the backpack
 
             while (true) {
                 try {
@@ -37,15 +37,14 @@ public class User {
                     sc.nextLine();  //Enter
                 }
             }
-
             sc.nextLine();  //Enter
 
             if (answer1 == 0) {
                 break;
 
-            } else if (answer1 <= backpack.items.size()) {
-                answer1--;
-                System.out.println("Description: " + backpack.items.get(answer1).getDescription() + "\n");
+            } else if (answer1 <= backpack.items.size()) {      //If the users answer is lower or equal to the amount if items in their backpack
+                answer1--;                                      //lowers the number by one
+                System.out.println("Description: " + backpack.items.get(answer1).getDescription() + "\n");  //Shows the description of the items that the user wanted to inspect
 
             } else {
                 System.out.println("Please write one of the options\n");
@@ -53,6 +52,7 @@ public class User {
         }
     }
 
+    //Increases amount of knowledge by one
     public void increaseKnowledge(){
             knowledge++;
     }
@@ -61,6 +61,7 @@ public class User {
         return knowledge;
     }
 
+    //Method where the user registers their name
     public String giveName() {
         Scanner sc = new Scanner(System.in);
         System.out.println("What is your name?");
@@ -78,6 +79,7 @@ public class User {
         return name;
     }
 
+    //Player is alive
     public boolean isAlive() {
         return true;
     }
