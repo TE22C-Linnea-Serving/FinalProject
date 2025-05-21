@@ -32,7 +32,7 @@ public class Key extends InteractibleItem{
                     if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
                         System.out.println(text1);  //Information for the player, unique for each interactable item
                         player.getBackpack().items.remove(i);
-                        interactibleFurniture.locked = false;
+                        interactibleFurniture.changeLockedStatus();
 
                         break;
                     } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {

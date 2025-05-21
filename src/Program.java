@@ -65,7 +65,7 @@ public class Program {
 
                         System.out.println("You walk over to the wardrobe and open it.\n");
 
-                        if (room.wardrobe.locked) {
+                        if (room.wardrobe.isLocked()) {
 
                             System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
 
@@ -95,7 +95,7 @@ public class Program {
                     //Right door
                     case "2":
 
-                        if (room.door.locked) {       //If the door is locked
+                        if (room.door.isLocked()) {       //If the door is locked
 
                             System.out.println("You try opening the door, but it won’t move.");
 
@@ -234,7 +234,7 @@ public class Program {
 
                             } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
                                 System.out.println("You open the book and find out there is a secret pocket inside it!\n");
-                                if (!room.bookshelf.contains.items.isEmpty()) {           //If there is items in the bookcase
+                                if (!room.bookshelf.getContains().items.isEmpty()) {           //If there is items in the bookcase
                                     player.getBackpack().pickUp(player, room.bookshelf);
 
                                 } else {
@@ -256,7 +256,7 @@ public class Program {
 
                     //Desk
                     case "2":
-                        if (room.desk.locked) {
+                        if (room.desk.isLocked()) {
                             System.out.println("You walk over to the desk, and find a locked drawer.\n");
                             String text2 = "You take the desk key, and open up the drawer";
                             key1.use(player, room.desk, text2);
@@ -280,11 +280,11 @@ public class Program {
                         //Exit door
                     case "5":
 
-                        while(room.exitDoor.locked) {        //While exit door is locked
+                        while(room.exitDoor.isLocked()) {        //While exit door is locked
                             System.out.println("You walk over to the exit door, but it is locked");
                             String text = "";
                             key1.use(player, room.exitDoor, text);
-                            if(!room.exitDoor.locked){       //If the player unlocked the exit door
+                            if(!room.exitDoor.isLocked()){       //If the player unlocked the exit door
                                 new Ending().ending56(player);
                             }else{                      //If the player did not unlock the exit door
                                 break;

@@ -23,13 +23,13 @@ public class Room {
         furniture.add(desk);
         furniture.add(exitDoor);
 
-        cabinet.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
-        cabinet.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
-        wardrobe.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
-        wardrobe.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
-        bookshelf.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
-        desk.contains.items.add(new Key("Exit key", "It is the key to the exit door!!", 5, false));
-        desk.contains.items.add(new Weapon("Letter opener", "A small knife used to open letters", 6));
+        cabinet.getContains().items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
+        cabinet.getContains().items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
+        wardrobe.getContains().items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
+        wardrobe.getContains().items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
+        bookshelf.getContains().items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
+        desk.getContains().items.add(new Key("Exit key", "It is the key to the exit door!!", 5, false));
+        desk.getContains().items.add(new Weapon("Letter opener", "A small knife used to open letters", 6));
 
     }
 

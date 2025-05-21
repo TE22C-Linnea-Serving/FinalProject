@@ -25,15 +25,15 @@ public class Inventory {
     public void pickUp(User player, InteractibleFurniture interactibleFurniture){
         Scanner sc = new Scanner(System.in);
 
-        if (!interactibleFurniture.contains.items.isEmpty()) {
+        if (!interactibleFurniture.getContains().items.isEmpty()) {
             System.out.print("You have found:\n");
-            interactibleFurniture.contains.displayInventory();
+            interactibleFurniture.getContains().displayInventory();
             System.out.println("Do you want to pick it up? (y/n)");
             while(true) {
                 String answer = sc.nextLine();
                 if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                    player.getBackpack().items.addAll(interactibleFurniture.contains.items);
-                    interactibleFurniture.contains.items.clear();          //Picks up all items
+                    player.getBackpack().items.addAll(interactibleFurniture.getContains().items);
+                    interactibleFurniture.getContains().items.clear();          //Picks up all items
                     System.out.println("You have now picket it up.\n");
                     break;
                 } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
