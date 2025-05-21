@@ -1,4 +1,4 @@
-public class Enemy extends Character{
+public class Enemy{
 
     //Attributes
     private int infectionRate;          //The stage of infection that the rat is currently on
