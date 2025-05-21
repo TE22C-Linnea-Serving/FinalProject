@@ -12,7 +12,7 @@ public class Ending {
     }
 
     public void ending3(){      //Third ending (Figured out small truth, and trusts note on table)
-        System.out.println("                      ENDING 3:\nTrusting the note on the table and your instincts, \nyou chose to remain trapped inside. Believing it is the best option for everyone.\n");
+        System.out.println("                      ENDING 3:\nTrusting the note on the table and your instincts, you chose to remain trapped inside. \nBelieving it is the best option for everyone.\n");
         System.exit(0);                                     //Ends the program
     }
 

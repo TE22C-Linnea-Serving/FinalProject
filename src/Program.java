@@ -269,31 +269,59 @@ public class Program {
 
                                 //Bookshelf
                                 case "1":
+                                    System.out.println("You walk over to the bookshelf and look at the books.\n");
 
                                     while(true) {
-                                        System.out.println("You walk over to the bookshelf and look at the books.\n\nWhich book do you want to open?\n1. \n2. \n3. \n4. \n5. Leave bookshelf");
-                                        answer = sc.nextLine();
+                                        System.out.println("Which book do you want to open?\n1. \"Notebook\"\n2. \"Dancing in the rain\"\n3. \"Echoes of the Void\"\n4. \"The Hollow crown\"\n5. Leave bookshelf\n");
+                                         answer = sc.nextLine();
 
                                         if (answer.equalsIgnoreCase("1")) { //Book 1 (Notebook for story elements)
-                                            System.out.println("\"\"");
+
+                                            while(true) {
+                                                System.out.println("It seems to be a notebook from some experiment.\nDo you want to read it? (y/n)\n");
+                                                answer = sc.nextLine();
+
+                                                if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+                                                    System.out.println("\"Laboratory Notebook Entry:\nDate: September 13, 2027\nResearcher: Dr. " + player.getName() + "\nProject Title: \"Creation of Life\"\nLab: Helix Corporation Research Facility\nEntry #: 21\n\nObservations:\nDay 1:\n- No immediate signs of life\n\nDay 9:\n- Noticeable movements\n\nDay 17:\n- The entity is expressing aggression towards humans\n- Moves well\n\nDay 28:\n- Very aggressive\n- Attacks on sight\n- Obtained ability to experience emotion\n\nDay 34:\n- Able to act similar to a parasite and take control of someones mind\"\n\nThat was the last page.\n");
+                                                    break;
+                                                } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                                                    System.out.println("You chose not to read the notebook and put it back in the bookshelf.\n");
+                                                    break;
+                                                } else {
+                                                    System.out.println("Please write one of the options.\n");
+                                                }
+                                            }
 
                                         } else if (answer.equalsIgnoreCase("2")) {  //Book 2 (Normal book)
-                                            System.out.println("\"Dancing in the Rain\" Looks like a normal Romance book.\n");
+                                            System.out.println("\"Dancing in the Rain\" Looks like a normal romance book.\n");
 
                                         } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
                                             if(!bookcase1.contains.items.isEmpty()) {           //If there is items in the bookcase
                                                 System.out.println("You open the book, and finds a key inside!\n");
-                                                player.backpack.pickUp(player, bookcase1);      //Picks up all items in bookcase
+                                                while(true) {
+                                                    System.out.println("Do you want to pic it up? (y/n)\n");
+                                                    answer = sc.nextLine();
+                                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+                                                        System.out.println("You pick up the key, and put the book back.\n");
+                                                        player.backpack.pickUp(player, bookcase1);      //Picks up all items in bookcase
+                                                        break;
+                                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                                                        System.out.println("You choose not to pick up the key, and put the book back.\n");
+                                                        break;
+                                                    } else {
+                                                        System.out.println("Please write yes or no.\n");
+                                                    }
+                                                }
 
                                             }else{
                                                 System.out.println("You open the book, and finds it empty.\n");
                                             }
 
                                         } else if (answer.equalsIgnoreCase("4")) {  //Book 4 (Normal book)
-
+                                            System.out.println("\"The Hollow Crown\" Looks like a normal a fantasy book.\n");
 
                                         } else if (answer.equalsIgnoreCase("5")) {  //Walk away from the bookcase
-
+                                            System.out.println("you walk away from the bookcase.\n");
                                             break;
                                         } else {                                                //If user writes something that is not an option
                                             System.out.println("Please write one of the options.\n");
