@@ -25,12 +25,13 @@ public class Enemy extends Character{
     }
 
     public void infectionRateIncrease(User player, Enemy enemy, boolean infectionRoute) {
-        infectionIncreaseHappens++;
-
-        if (infectionIncreaseHappens % 2 == 0) {    //If infectionIncreaseHappens is an even number
 
             if (infectionRoute) {                //This only happens if the player triggered the starting event, if not, nothing happens
-                if (infectionRate == 1) {
+                infectionIncreaseHappens++;
+
+                if (infectionIncreaseHappens % 2 == 0) {    //If infectionIncreaseHappens is an even number
+
+                    if (infectionRate == 1) {
                     System.out.println("Once again, you can see the rat in the corner of the room. \nYou make sure to stay away from it, just to be safe.\n");
                     infectionRate++;
                 } else if (infectionRate == 2) {  //If the rat is on the second stage of the
