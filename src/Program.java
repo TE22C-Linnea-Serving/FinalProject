@@ -208,7 +208,7 @@ public class Program {
                                     System.out.println("It seems to be a notebook from some experiment.\nDo you want to read it? (y/n)\n");
                                     answer = sc.nextLine();
 
-                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+                                    if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) { //If user wants to read the notebook
                                         System.out.println("\"Laboratory Notebook Entry:\nDate: September 13, 2027\nResearcher: Dr. " + player.getName() + "\nProject Title: \"Creation of Life\"\nLab: Helix Corporation Research Facility\nEntry #: 21\n\nObservations:\nDay 1:\n- No immediate signs of life\n\nDay 9:\n- Noticeable movements\n\nDay 17:\n- The entity is expressing aggression towards humans\n- Moves well\n\nDay 28:\n- Very aggressive\n- Attacks on sight\n- Obtained ability to experience emotion\n\nDay 34:\n- Able to act similar to a parasite and take control of someones mind\n\nDay 36:\n- The entity has escaped it's enclosure and is on the run\n\nDay37:\n- Due to sudden illness and involuntary movements of " + player.getName() + ", the project is ended immediately.\"\n\nThat was the last page...\nAm I...a parasite?");
                                         if(test2) {         //Makes it only happens per time the program is started
                                             for(int i = 0; i<5; i++) {      //Gains four knowledge from seeing the notebook (Only happens once)
@@ -217,11 +217,11 @@ public class Program {
                                                 test2 = false;
                                         }
                                         break;
-                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                                    } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {     //If the user does not want to read the notebook
                                         System.out.println("You chose not to read the notebook and put it back in the bookshelf.\n");
                                         break;
                                     } else {
-                                        System.out.println("Please write one of the options.\n");
+                                        System.out.println("Please write yes or no.\n");
                                     }
                                 }
 
@@ -230,10 +230,10 @@ public class Program {
 
                             } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
                                 System.out.println("You open the book and find out there is a secret pocket inside it!\n");
-                                if (!room.bookshelf.getContains().items.isEmpty()) {           //If there is items in the bookcase
-                                    player.getBackpack().pickUp(player, room.bookshelf);
+                                if (!room.bookshelf.getContains().items.isEmpty()) {           //If there is items in the bookshelf
+                                    player.getBackpack().pickUp(player, room.bookshelf);        //Adds all the items from the InteractableFurniture to the players backpack
 
-                                } else {
+                                } else {                                                        //If there is no item in bookshelf
                                     System.out.println("You open the book, and finds it empty.\n");
                                 }
 
@@ -244,7 +244,7 @@ public class Program {
                                 System.out.println("you walk away from the bookcase.\n");
                                 break;
                             } else {                                                //If user writes something that is not an option
-                                System.out.println("Please write one of the options.\n");
+                                System.out.println("Please write \"1\", \"2\", \"3\", \"4\" or \"5\".\n");
                             }
                         }
                         break;
@@ -252,25 +252,23 @@ public class Program {
 
                     //Desk
                     case "2":
-                        if (room.desk.isLocked()) {
+                        if (room.desk.isLocked()) {                 //If the desk is locked
                             System.out.println("You walk over to the desk, and find a locked drawer.\n");
                             String text2 = "You take the desk key, and open up the drawer";
-                            key1.use(player, room.desk, text2);
-                        } else {
-                            player.getBackpack().pickUp(player, room.desk);
-
+                            key1.use(player, room.desk, text2);     //Checks to see if player has the right item in their backpack, and uses it
+                        } else {                                    //If the desk is not locked
+                            player.getBackpack().pickUp(player, room.desk);     //Adds all items in InteractableFurniture to players backpack
                         }
-
                         break;
 
                     //Cat
-                    case "3":
+                    case "3":       //NOT YET ADDED
 
                         break;
 
                     //Inventory show
                     case "4":
-                        player.showInventory();
+                        player.showInventory(); //Shows the players backpack, and allows the user to inspect the items inside
                         break;
 
                         //Exit door
@@ -291,11 +289,10 @@ public class Program {
                     //Back to Room 1
                     case "6":
                         System.out.println("You go back to the first room\n");
-                        stage = 1;
-
+                        stage = 1;                      //Changes what room the program loops around
                         break;
                 }
-                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
+                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu, increases infection in rat if route is activated
             }
         }
     }
