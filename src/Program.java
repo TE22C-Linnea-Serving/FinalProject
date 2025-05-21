@@ -6,10 +6,11 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
 
+        boolean test1 = true;
+        boolean test2 = true;
         int answer1 = 0;
         String answer = "";
-
-        int stage = 1;
+        int stage = 0;
 
         Room room1 = new Room();
         Room room2 = new Room();
@@ -21,11 +22,14 @@ public class Program {
         InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,1);
         InteractibleFurniture bookshelf1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
         InteractibleFurniture desk1 = new InteractibleFurniture("Desk", "A normal desk", true, 4);
+        InteractibleFurniture exitDoor = new InteractibleFurniture("Exit door", "The door leads to the outside", true, 5);
 
         room1.furniture.add(door1);
         room1.furniture.add(cabinet1);
         room1.furniture.add(wardrobe1);
         room2.furniture.add(bookshelf1);
+        room2.furniture.add(desk1);
+        room2.furniture.add(exitDoor);
 
 
         cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
@@ -43,19 +47,24 @@ public class Program {
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
 
+        while(stage == 0) {
             System.out.println("What is your goal?\n1. To escape this room and obtain freedom.\n2. To remain, and live out the rest of your life here.");
             try {
                 answer1 = sc.nextInt();
+
+                if (answer1 == 1) {
+                    stage = 1;
+                    break;
+                } else if (answer1 == 2) {
+                    new Ending().ending1();
+                } else {
+                    System.out.println("Please choose one of the options.\n");
+                }
             } catch (Exception e) {
                 System.out.println("please choose one of the options.\n");
             }
-            if (answer1 == 1) {
-                sc.nextLine();      //Enter
-            } else if (answer1 == 2) {
-                new Ending().ending1();
-            } else {
-                System.out.println("Please choose one of the options.\n");
-            }
+        }
+        sc.nextLine();  //Enter
 
 
         while(player.isAlive() && stage == 1) {
@@ -70,7 +79,6 @@ public class Program {
                         System.out.println("Please write one of the option.");
                         sc.nextLine();  //Enter
                     }
-                    rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
                 }
 
                 switch (answer) {
@@ -128,7 +136,7 @@ public class Program {
 
                                     break;
                                 } else if (answer.equalsIgnoreCase("2")) {
-                                    new Ending().ending3();         //Activates an ending
+                                    new Ending().ending34(player);         //Activates an ending
 
                                 } else {
                                     System.out.println("Pleas write \"1\" or \"2\".\n");
@@ -152,6 +160,11 @@ public class Program {
                         while (true) {
                             if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
                                 note1.use();
+                                if(test1) {         //Makes it only happens per time the program is started
+                                    player.increaseKnowledge();
+                                    test1 = false;
+                                }
+                                System.out.println(player.getKnowledge());
                                 break;
                             } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
                                 System.out.println("You leave without reading the note.\n");
@@ -165,36 +178,10 @@ public class Program {
 
                     //Inventory show
                     case "5":
-                        while (true) {
-                            System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
-                            System.out.println("0. esc");
-                            player.backpack.displayInventory();
-
-                            while (true) {
-                                try {
-                                    answer1 = sc.nextInt();
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println("Please write a number.\n");
-                                    sc.nextLine(); //Enter
-                                }
-                            }
-
-                            sc.nextLine();  //Enter
-
-                            if (answer1 == 0) {
-                                break;
-
-                            } else if (answer1 <= player.backpack.items.size()) {
-                                answer1--;
-                                System.out.println("Description: " + player.backpack.items.get(answer1).description + "\n");
-
-                            } else {
-                                System.out.println("Please write one of the options\n");
-                            }
-                        }
+                        player.showInventory();
                         break;
                 }
+                rat.infectionRateIncrease(player, rat, rat.isInfectionRoute()); //Happens after every choice in main menu
             }
 
             //SECOND ROOM CODE
@@ -229,7 +216,7 @@ public class Program {
 
                 //AFTER RAT INTERACTION
 
-                System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Go to the cat\n4. Show inventory\n5. Go back");
+                System.out.println("What do you want to do?\n1. Inspect Bookshelf\n2. Inspect Desk\n3. Go to the cat\n4. Show inventory\n5. Inspect Exit door\n6. Go back");
                 answer = sc.nextLine();
 
                 switch (answer) {
@@ -249,7 +236,13 @@ public class Program {
                                     answer = sc.nextLine();
 
                                     if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                                        System.out.println("\"Laboratory Notebook Entry:\nDate: September 13, 2027\nResearcher: Dr. " + player.getName() + "\nProject Title: \"Creation of Life\"\nLab: Helix Corporation Research Facility\nEntry #: 21\n\nObservations:\nDay 1:\n- No immediate signs of life\n\nDay 9:\n- Noticeable movements\n\nDay 17:\n- The entity is expressing aggression towards humans\n- Moves well\n\nDay 28:\n- Very aggressive\n- Attacks on sight\n- Obtained ability to experience emotion\n\nDay 34:\n- Able to act similar to a parasite and take control of someones mind\"\n\nThat was the last page.\n");
+                                        System.out.println("\"Laboratory Notebook Entry:\nDate: September 13, 2027\nResearcher: Dr. " + player.getName() + "\nProject Title: \"Creation of Life\"\nLab: Helix Corporation Research Facility\nEntry #: 21\n\nObservations:\nDay 1:\n- No immediate signs of life\n\nDay 9:\n- Noticeable movements\n\nDay 17:\n- The entity is expressing aggression towards humans\n- Moves well\n\nDay 28:\n- Very aggressive\n- Attacks on sight\n- Obtained ability to experience emotion\n\nDay 34:\n- Able to act similar to a parasite and take control of someones mind\n\nDay 36:\n- The entity has escaped it's enclosure and is on the run\n\nDay37:\n- Due to sudden illness and involuntary movements of " + player.getName() + ", the project is ended immediately.\"\n\nThat was the last page...\nAm I...a parasite?");
+                                        if(test2) {         //Makes it only happens per time the program is started
+                                            for(int i = 0; i<5; i++) {      //Gains four knowledge from seeing the notebook (Only happens once)
+                                                player.increaseKnowledge();
+                                            }
+                                                test2 = false;
+                                        }
                                         break;
                                     } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
                                         System.out.println("You chose not to read the notebook and put it back in the bookshelf.\n");
@@ -263,6 +256,7 @@ public class Program {
                                 System.out.println("\"Dancing in the Rain\" Looks like a normal romance book.\n");
 
                             } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
+                                System.out.println("You open the book and find out there is a secret pocket inside it!\n");
                                 if (!bookshelf1.contains.items.isEmpty()) {           //If there is items in the bookcase
                                     player.backpack.pickUp(player, bookshelf1);
 
@@ -303,38 +297,26 @@ public class Program {
 
                     //Inventory show
                     case "4":
-                        while (true) {
-                            System.out.println("Your inventory currently contains: \n(write the number of the item you want to inspect)");
-                            System.out.println("0. esc");
-                            player.backpack.displayInventory();
+                        player.showInventory();
+                        break;
 
-                            while (true) {
-                                try {
-                                    answer1 = sc.nextInt();
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println("Please write a number.\n");
-                                    sc.nextLine();  //Enter
-                                }
-                            }
+                        //Exit door
+                    case "5":
 
-                            sc.nextLine();  //Enter
-
-                            if (answer1 == 0) {
+                        while(exitDoor.locked) {        //While exit door is locked
+                            System.out.println("You walk over to the exit door, but it is locked");
+                            String text = "";
+                            key1.use(player, exitDoor, text);
+                            if(!exitDoor.locked){       //If the player unlocked the exit door
+                                new Ending().ending56(player);
+                            }else{                      //If the player did not unlock the exit door
                                 break;
-
-                            } else if (answer1 <= player.backpack.items.size()) {
-                                answer1--;
-                                System.out.println("Description: " + player.backpack.items.get(answer1).description + "\n");
-
-                            } else {
-                                System.out.println("Please write one of the options\n");
                             }
                         }
                         break;
 
                     //Back to Room 1
-                    case "5":
+                    case "6":
                         System.out.println("You go back to the first room\n");
                         stage = 1;
 
