@@ -4,7 +4,7 @@ public class User {
 
     //Attributes
     private String name;
-    private Inventory backpack;
+    private final Inventory backpack;
     private int knowledge = 0;
 
     public User(){
@@ -45,7 +45,7 @@ public class User {
 
             } else if (answer1 <= backpack.items.size()) {
                 answer1--;
-                System.out.println("Description: " + backpack.items.get(answer1).description + "\n");
+                System.out.println("Description: " + backpack.items.get(answer1).getDescription() + "\n");
 
             } else {
                 System.out.println("Please write one of the options\n");

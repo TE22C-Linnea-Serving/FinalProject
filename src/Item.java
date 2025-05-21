@@ -1,9 +1,9 @@
 public class Item {
 
     //Attributes
-    String name;
-    String description;
-    int id;
+    private String name;
+    private String description;
+    private int id;
 
 
     //Constructor
@@ -18,4 +18,15 @@ public class Item {
     }
 
     //Methods
+    public int getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

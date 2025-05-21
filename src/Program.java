@@ -8,8 +8,8 @@ public class Program {
 
         boolean test1 = true;
         boolean test2 = true;
-        int answer1 = 0;
-        String answer = "";
+        int answer1;
+        String answer;
         int stage = 0;
 
         Room room = new Room();
@@ -24,32 +24,32 @@ public class Program {
         System.out.println("You find yourself trapped in a small, dark lit room.\n\n");
 
 
-        while(stage == 0) {
+        while(stage == 0) {     //Only happens the first time the code is run
             System.out.println("What is your goal?\n1. To escape this room and obtain freedom.\n2. To remain, and live out the rest of your life here.");
-            try {
-                answer1 = sc.nextInt();
+            try {                                                                 //The try-catch makes sure the user can only write numbers
+                answer1 = sc.nextInt();                                           //Takes in answer to the question above from user
 
-                if (answer1 == 1) {
+                if (answer1 == 1) {                                               //If the user chooses to try and escape, the game will continue
                     stage = 1;
                     break;
-                } else if (answer1 == 2) {
-                    new Ending().ending1();
+                } else if (answer1 == 2) {                                       //If the player chooses to stay in the room
+                    new Ending().ending1();                                      //Ending one activated
                 } else {
-                    System.out.println("Please choose one of the options.\n");
+                    System.out.println("Please choose one of the options.\n");  //If user writes a number that was not an obtion
                 }
             } catch (Exception e) {
                 System.out.println("please choose one of the options.\n");
             }
         }
-        sc.nextLine();  //Enter
+        sc.nextLine();  //Enter (Mainly used when changing between whether the user has to input a String or an int)
 
 
-        while(player.isAlive() && stage == 1) {
+        while(player.isAlive() && stage == 1) {         //If the user is alive and is supposed to be in room 1
             while (stage == 1) {
                 while (true) {
                     System.out.println("What do you want to do?\n1. Inspect wardrobe\n2. Inspect right door\n3. Inspect cabinet\n4. inspect table\n5. Show Inventory\n");
-                    answer = sc.nextLine();
-                    System.out.println();       //Space
+                    answer = sc.nextLine();         //Takes in String from user
+                    System.out.println();           //Space (Makes the game more aesthetic)
                     if (answer.equals("1") || answer.equals("2") || answer.equals("3") || answer.equals("4") || answer.equals("5")) {
                         break;
                     } else {

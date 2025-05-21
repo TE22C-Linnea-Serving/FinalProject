@@ -12,11 +12,10 @@ public class Inventory {
 
 
     //Methods
-
     public void displayInventory(){
         int i = 1;
         for(Item item: items){
-            System.out.println(i + ". " + item.name);
+            System.out.println(i + ". " + item.getName());
             i++;
         }
         System.out.println();

@@ -3,14 +3,10 @@ import java.util.Scanner;
 public class Key extends InteractibleItem{
 
     //Attributes
-    private boolean used;
 
     //Constructor
-    public Key(String name, String description, int id, boolean used){
+    public Key(String name, String description, int id){
         super(name, description, id);
-        this.name = name;
-        this.description = description;
-        this.used = used;
     }
 
     public Key() {
@@ -24,8 +20,8 @@ public class Key extends InteractibleItem{
         boolean hasKey = false;
 
         for (int i=0; i<=player.getBackpack().items.size()-1; i++){  //Goes through the players inventory
-            if(player.getBackpack().items.get(i).id == interactibleFurniture.id){           //If the player has the door key in their inventory
-                System.out.println("Do you want to use the " + player.getBackpack().items.get(i).name + "? (y/n)\n");
+            if(player.getBackpack().items.get(i).getId() == interactibleFurniture.getId()){           //If the player has the door key in their inventory
+                System.out.println("Do you want to use the " + player.getBackpack().items.get(i).getName() + "? (y/n)\n");
 
                 while(true) {
                     String answer = sc.nextLine();
@@ -36,7 +32,7 @@ public class Key extends InteractibleItem{
 
                         break;
                     } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                        System.out.println("You leave without using the " + player.getBackpack().items.get(i).name + ".\n");
+                        System.out.println("You leave without using the " + player.getBackpack().items.get(i).getName() + ".\n");
                         hasKey = true;
                         break;
                     }else{

@@ -1,10 +1,8 @@
-import static java.awt.SystemColor.text;
-
 public class Furniture {
 
     //Attributes
-     String name;
-     String description;
+    private final String name;
+    private final String description;
 
     //Constructor
     Furniture(String name, String description){

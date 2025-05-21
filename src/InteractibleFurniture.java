@@ -1,17 +1,19 @@
 public class InteractibleFurniture extends Furniture{
 
     //Attributes
-    private Inventory contains;
+    private final Inventory contains;
     private boolean locked;
-    int id;
+    private final int id;
 
     public InteractibleFurniture(String name, String description, boolean locked, int id){
         super(name, description);
-        this.name = name;
-        this.description = description;
         this.locked = locked;
         contains = new Inventory();
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public boolean isLocked() {
@@ -22,12 +24,7 @@ public class InteractibleFurniture extends Furniture{
         return contains;
     }
 
-    public boolean changeLockedStatus(){
-        if(locked){
-            locked = false;
-        }else{
-            locked = true;
-        }
-        return locked;
+    public void changeLockedStatus(){
+        locked = !locked;
     }
 }
