@@ -23,27 +23,27 @@ public class Key extends InteractibleItem{
         Scanner sc = new Scanner(System.in);
         boolean hasKey = false;
 
-        for (int i=0; i<=player.backpack.items.size()-1; i++){  //Goes through the players inventory
-            if(player.backpack.items.get(i).id == interactibleFurniture.id){           //If the player has the door key in their inventory
-                System.out.println("Do you want to use the " + player.backpack.items.get(i).name + "? (y/n)\n");
+        for (int i=0; i<=player.getBackpack().items.size()-1; i++){  //Goes through the players inventory
+            if(player.getBackpack().items.get(i).id == interactibleFurniture.id){           //If the player has the door key in their inventory
+                System.out.println("Do you want to use the " + player.getBackpack().items.get(i).name + "? (y/n)\n");
 
                 while(true) {
                     String answer = sc.nextLine();
                     if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
                         System.out.println(text1);  //Information for the player, unique for each interactable item
-                        player.backpack.items.remove(i);
+                        player.getBackpack().items.remove(i);
                         interactibleFurniture.locked = false;
 
                         break;
                     } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
-                        System.out.println("You leave without using the " + player.backpack.items.get(i).name + ".\n");
+                        System.out.println("You leave without using the " + player.getBackpack().items.get(i).name + ".\n");
                         hasKey = true;
                         break;
                     }else{
                         System.out.println("Please write one of the options.\n");
                     }
                 }
-            }else if(i == player.backpack.items.size()-1 && !hasKey){                                              //If the player does not have the door key in their inventory
+            }else if(i == player.getBackpack().items.size()-1 && !hasKey){                                              //If the player does not have the door key in their inventory
                 System.out.print("Maybe you could look around to see if you can find some sort of key?\n\n");
             }
         }

@@ -36,11 +36,11 @@ public class Enemy extends Character{
                 } else if (infectionRate == 4) {
                     System.out.println("\nThe rat suddenly leaps out from nowhere, attacking you!\n");
 
-                    for (int i = 0; i <= player.backpack.items.size() - 1; i++) {         //Check if player has the right item in their backpack
-                        if (player.backpack.items.get(i).id == enemy.id) {
-                            System.out.println("You hastily pull out the " + player.backpack.items.get(i).name + " from your backpack, \nand manage to defend yourself with it by killing the rat!\n");
+                    for (int i = 0; i <= player.getBackpack().items.size() - 1; i++) {         //Check if player has the right item in their backpack
+                        if (player.getBackpack().items.get(i).id == enemy.id) {
+                            System.out.println("You hastily pull out the " + player.getBackpack().items.get(i).name + " from your backpack, \nand manage to defend yourself with it by killing the rat!\n");
 
-                        } else if (i == player.backpack.items.size() - 1) {              //If the for-loop did not find a weapon in player backpack
+                        } else if (i == player.getBackpack().items.size() - 1) {              //If the for-loop did not find a weapon in player backpack
                             new Ending().ending2();
 
                         }

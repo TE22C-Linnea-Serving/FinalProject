@@ -12,35 +12,12 @@ public class Program {
         String answer = "";
         int stage = 0;
 
-        Room room1 = new Room();
-        Room room2 = new Room();
+        Room room = new Room();
         User player = new User();
         Key key1 = new Key();
 
-        InteractibleFurniture door1 = new InteractibleFurniture("Door", "The door that lead to another room", true,3);
-        InteractibleFurniture cabinet1 = new InteractibleFurniture("Cabinet", "A small cabinet", false,0);
-        InteractibleFurniture wardrobe1 = new InteractibleFurniture("Wardrobe", "A big wardrobe with a mystery", true,1);
-        InteractibleFurniture bookshelf1 = new InteractibleFurniture("Bookcase", "A small bookcase with four books", false, 0);
-        InteractibleFurniture desk1 = new InteractibleFurniture("Desk", "A normal desk", true, 4);
-        InteractibleFurniture exitDoor = new InteractibleFurniture("Exit door", "The door leads to the outside", true, 5);
-
-        room1.furniture.add(door1);
-        room1.furniture.add(cabinet1);
-        room1.furniture.add(wardrobe1);
-        room2.furniture.add(bookshelf1);
-        room2.furniture.add(desk1);
-        room2.furniture.add(exitDoor);
-
-
-        cabinet1.contains.items.add(new Key("Screwdriver", "A normal screwdriver", 1, false));
-        cabinet1.contains.items.add(new Key("Mini flag", "A small flag with a sphere at the bottom", 2, false));
-        player.backpack.items.add(new InteractibleItem("Name tag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
+        player.getBackpack().items.add(new InteractibleItem("Name tag", "Name: " + player.giveName() + ", \"Researcher at Helix Corporation\"",0));
         Clue note1 = new Clue("Note", "A note with some text written on it", "\"If you are seeing this, please do not attempt to escape. \nYou will endanger everyone if you manage to do so because of...\" \nThe ink is smudged, and it is too dark to try to make out what it says.\n", 0);
-        wardrobe1.contains.items.add(new Clue("A paper", "A contract, seems to be about some kind of biological experiment", "\"...Contract stuff...\"", 0));
-        wardrobe1.contains.items.add(new Key("Door key", "It seems to be the key that unlocks the door!", 3, false));
-        bookshelf1.contains.items.add(new Key("Desk key", "It seems to be the key that unlocks the desk drawer!", 4, false));
-        desk1.contains.items.add(new Key("Exit key", "It is the key to the exit door!!", 5, false));
-        desk1.contains.items.add(new Weapon("Letter opener", "A small knife used to open letters", 6));
         Enemy rat = new Enemy(0, false, 6);
 
         System.out.println("Backstory...");
@@ -88,12 +65,12 @@ public class Program {
 
                         System.out.println("You walk over to the wardrobe and open it.\n");
 
-                        if (wardrobe1.locked) {
+                        if (room.wardrobe.locked) {
 
                             System.out.println("Inside, you find a hatch at the bottom of the wardrobe, but it seems stuck.\n");
 
                             String text = "You take the screwdriver and rotate it 360 degrees multiple times, till the screw comes loose. \nYou do this for each screw, until the door hatch is completely detached.\n";
-                            key1.use(player, wardrobe1, text);
+                            key1.use(player, room.wardrobe, text);
                         } else {
                             System.out.println("Inside, you find what seems to be an endless dark pit.\n");
                             System.out.println("What do you want to do?\n1. Reach your hand down\n2. Don't do anything\n");
@@ -101,7 +78,7 @@ public class Program {
                             while (true) {
                                 answer = sc.nextLine();
                                 if (answer.equalsIgnoreCase("1")) {
-                                    player.backpack.pickUp(player, wardrobe1);
+                                    player.getBackpack().pickUp(player, room.wardrobe);
 
                                     break;
                                 } else if (answer.equalsIgnoreCase("2")) {
@@ -118,12 +95,12 @@ public class Program {
                     //Right door
                     case "2":
 
-                        if (door1.locked) {       //If the door is locked
+                        if (room.door.locked) {       //If the door is locked
 
                             System.out.println("You try opening the door, but it won’t move.");
 
                             String text1 = "You put the door key into the key hole and turn it slowly.\nThe door that was once closed has now opened, revealing another room, this time a bit brighter.\nHowever, the key used to open the door, is now stuck in the keyhole, \nand refuses to let go, without you locking the door again.\n";
-                            key1.use(player, door1, text1);
+                            key1.use(player, room.door, text1);
 
                         } else {                  //If the door is unlocked
                             System.out.println("What do you want to do?\n1. Walk through the door\n2. Lock the door again\n");
@@ -147,7 +124,7 @@ public class Program {
 
                     //Cabinet
                     case "3":
-                        player.backpack.pickUp(player, cabinet1);       //Directs to the pickUp method in the Inventory class
+                        player.getBackpack().pickUp(player, room.cabinet);       //Directs to the pickUp method in the Inventory class
 
                         break;
 
@@ -257,8 +234,8 @@ public class Program {
 
                             } else if (answer.equalsIgnoreCase("3")) {  //Book 3 (Key inside for desk)
                                 System.out.println("You open the book and find out there is a secret pocket inside it!\n");
-                                if (!bookshelf1.contains.items.isEmpty()) {           //If there is items in the bookcase
-                                    player.backpack.pickUp(player, bookshelf1);
+                                if (!room.bookshelf.contains.items.isEmpty()) {           //If there is items in the bookcase
+                                    player.getBackpack().pickUp(player, room.bookshelf);
 
                                 } else {
                                     System.out.println("You open the book, and finds it empty.\n");
@@ -279,12 +256,12 @@ public class Program {
 
                     //Desk
                     case "2":
-                        if (desk1.locked) {
+                        if (room.desk.locked) {
                             System.out.println("You walk over to the desk, and find a locked drawer.\n");
                             String text2 = "You take the desk key, and open up the drawer";
-                            key1.use(player, desk1, text2);
+                            key1.use(player, room.desk, text2);
                         } else {
-                            player.backpack.pickUp(player, desk1);
+                            player.getBackpack().pickUp(player, room.desk);
 
                         }
 
@@ -303,11 +280,11 @@ public class Program {
                         //Exit door
                     case "5":
 
-                        while(exitDoor.locked) {        //While exit door is locked
+                        while(room.exitDoor.locked) {        //While exit door is locked
                             System.out.println("You walk over to the exit door, but it is locked");
                             String text = "";
-                            key1.use(player, exitDoor, text);
-                            if(!exitDoor.locked){       //If the player unlocked the exit door
+                            key1.use(player, room.exitDoor, text);
+                            if(!room.exitDoor.locked){       //If the player unlocked the exit door
                                 new Ending().ending56(player);
                             }else{                      //If the player did not unlock the exit door
                                 break;

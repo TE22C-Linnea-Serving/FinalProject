@@ -4,9 +4,8 @@ public class User {
 
     //Attributes
     private String name;
-    Inventory backpack;
+    private Inventory backpack;
     private int knowledge = 0;
-    private boolean chanceForKnowledge1 = true;
 
     public User(){
         name = getName();
@@ -16,6 +15,10 @@ public class User {
 
 
     //Methods
+    public Inventory getBackpack() {
+        return backpack;
+    }
+
     public void showInventory(){
         Scanner sc = new Scanner(System.in);
         int answer1;

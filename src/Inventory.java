@@ -32,7 +32,7 @@ public class Inventory {
             while(true) {
                 String answer = sc.nextLine();
                 if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
-                    player.backpack.items.addAll(interactibleFurniture.contains.items);
+                    player.getBackpack().items.addAll(interactibleFurniture.contains.items);
                     interactibleFurniture.contains.items.clear();          //Picks up all items
                     System.out.println("You have now picket it up.\n");
                     break;
