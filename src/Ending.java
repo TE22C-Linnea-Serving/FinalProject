@@ -5,11 +5,12 @@ public class Ending {
 
     }
 
-    public void ending2(){      //Second ending (Figures some secrets out, but not all)
+    public void ending2(){      //Second ending (Dies to infected rat)
+        System.out.println("                      ENDING 2:\nYOU DIED BY THE RAT!");
 
     }
 
-    public void ending3(){      //Third ending (Figures all secrets out, and chose to take responsibility)
+    public void ending3(){      //Third ending (Figures secrets out, and chose to take responsibility)
 
     }
 

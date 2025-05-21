@@ -5,6 +5,7 @@ public class User {
     //Attributes
     private String name;
     Inventory backpack;
+    private boolean alive = true;
 
     public User(){
         this.name = name;
@@ -22,12 +23,19 @@ public class User {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
         return name;
     }
 
     public void chooseName(){
 
+    }
+
+    public boolean death(){
+        alive = false;
+        return alive;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
